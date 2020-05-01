@@ -22,3 +22,9 @@ estado varchar(2)
 
 describe projeto; -- Descrevendo os campos 
 select * from tb_clientes; -- Exibindo os clientes cadastrados
+
+-- Inserir cliente sql
+insert into tb_clientes (nome, rg, cpf, email, telefone, celular, cep, endereco, 
+numero, complemento, bairro, cidade, estado) 
+values (?,?,?,?,?,?,?,?,?,?,?,?,?);
+-- aonde os ? seria os dados em sequencia nos parametros acima
