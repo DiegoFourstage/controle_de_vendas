@@ -16,3 +16,11 @@ Commit 07 Método Cadastrar Cliente
 Novo pacote br.com.projeto.dao, nova classe ClientesDAO, criar construtor
 Para conexão com o banco de dados assim toda vez que chamar a conexão com o banco de dados será executada, apenas fecharar a conexão após ser inserido dados e atualizado os dados dos Clientes
 
+Commit 08 Formatando RG, CPF, Cel, Tel e CEP
+Modificando o Campo de texto para Campo formatado dos itens acima, em propriedade item selecionado em formatterFactory selecione máscara e segue abaixo formatações:
+Cpf: ###.###.###-##
+Rg: ##.###.###-##
+Cel: (##) # ####-####
+Tel: (##) ####-####
+Cep: ## ###-###
+
