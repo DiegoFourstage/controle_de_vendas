@@ -24,13 +24,3 @@ Cel: (##) # ####-####
 Tel: (##) ####-####
 Cep: ## ###-###
 
-Commit 09 Implementando Método Cadastrar Cliente
-Iremos para a classe FrmClientes, em btnSalvar vamos adicionar novo envento ActionPerformed, assim que clicado ele executarar, nesse evento
-Instanciaremos a classe Clientes ela será nosso obj, exemplo: obj.setNome(txtNome.getText(); isso para uma String, para Int
-Obj.setNumero(Integer.parseInt(txtNumero.getText)); agora para um Cbox
-Obj.setUf(cboUf.getSelectedItem().toString());
-
-Após todos os dados inseridos instanciaremos nosso ClienteDAO, para acessar nosso método cadastrar e em parâmetros ele receberar o obj
-cliente
-
-

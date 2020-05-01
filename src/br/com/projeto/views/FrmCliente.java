@@ -5,6 +5,9 @@
  */
 package br.com.projeto.views;
 
+import br.com.projeto.dao.ClientesDAO;
+import br.com.projeto.model.Clientes;
+
 /**
  *
  * @author D1350
@@ -129,7 +132,7 @@ public class FrmCliente extends javax.swing.JFrame {
 
         jLabel15.setText("Uf:");
 
-        cboUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "sp", "mg", "bh" }));
 
         try {
             txtRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-##")));
@@ -342,6 +345,11 @@ public class FrmCliente extends javax.swing.JFrame {
         jTabbedPane1.addTab("Consultar", jPanel4);
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -412,6 +420,32 @@ public class FrmCliente extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // Salvando cliente
+        // Adicionando dados inserido nos campos e passando para obj, e adicionado ao nosso clienteDAO
+        
+        Clientes obj = new Clientes(); // Nosso objeto
+        obj.setNome(txtNome.getText());
+        obj.setRg(txtRg.getText());
+        obj.setCpf(txtCpf.getText());
+        obj.setEmail(txtEmail.getText());
+        obj.setTelefone(txtTel.getText());
+        obj.setCelular(txtCel.getText());
+        obj.setCep(txtCep.getText());
+        obj.setEndereco(txtEnd.getText());
+        obj.setNumero(Integer.parseInt(txtNumber.getText()));
+        obj.setComplemento(txtComple.getText());
+        obj.setBairro(txtBairro.getText());
+        obj.setCidade(txtCity.getText());
+        obj.setUf(cboUf.getSelectedItem().toString());
+        
+        // Nosso ClienteDAO
+        ClientesDAO dao = new ClientesDAO();
+        dao.cadastraCliente(obj); // dao e nosso método cadastrar Cliente adionando obj, dados que foram
+                                  // inserido em FrmCliente      
+                                  // Após par verificar entre no seu WordKBench e de um select * from tb_clientes
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments

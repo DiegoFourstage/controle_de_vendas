@@ -25,7 +25,7 @@ public class ClientesDAO {
             // Caminho sql para inserção de dados a tb_clientes
             String sql = "insert into tb_clientes (nome, rg, cpf, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-            // Prepatando a ser inserido os dados
+            // Preparando a ser inserido os dados
             PreparedStatement pst = conexao.prepareStatement(sql);
 
             // Ao inserir os dados
@@ -37,11 +37,11 @@ public class ClientesDAO {
             pst.setString(6, obj.getCelular());
             pst.setString(7, obj.getCep());
             pst.setString(8, obj.getEndereco());
-            pst.setInt(2, obj.getNumero());
-            pst.setString(9, obj.getComplemento());
-            pst.setString(10, obj.getBairro());
-            pst.setString(11, obj.getCidade());
-            pst.setString(12, obj.getUf());
+            pst.setInt(9, obj.getNumero());
+            pst.setString(10, obj.getComplemento());
+            pst.setString(11, obj.getBairro());
+            pst.setString(12, obj.getCidade());
+            pst.setString(13, obj.getUf());
 
             // Atualizando os dados que ja foram inseridos
             pst.execute();
