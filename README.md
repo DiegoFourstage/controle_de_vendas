@@ -5,5 +5,10 @@ Commit 04
 Novo pacote model e sql, no pacote model nova classe Clientes e encapsulando atributos com seus geeter e setters, no pacote sql 
 adicionando novo banco de dados com nome de "projeto" e adicionando nova tabela de Clientes com seus elementos
 
-Commit 05
-Criando um novo pacote br.com.projeto.jdbc, a dentro método Connection getConnection em um try e catch String de conexão com o banco de dados
+Commit 05 
+Criando um novo pacote br.com.projeto.jdbc, a dentro método Connection getConnection classe responsável para a conexão com o banco de dados
+
+Commit 06 Testando a conexão com o banco de dados
+Nova classe TesteConexao, classe responsável para testar a nossa conexão
+Caso não conecte erro exception mostrado em um MessageDialog
+
