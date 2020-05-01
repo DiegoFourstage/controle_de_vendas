@@ -107,19 +107,13 @@ public class FrmCliente extends javax.swing.JFrame {
 
         jLabel4.setText("E-mail:");
 
-        jTextField3.setText("txtEmail");
-
         jLabel5.setText("Cep:");
 
         jLabel6.setText("Bairro:");
 
-        jTextField5.setText("txtBairro");
-
         jLabel7.setText("Rg:");
 
         jLabel8.setText("Cpf:");
-
-        jTextField7.setText("txtCpf");
 
         jLabel9.setText("End:");
 
