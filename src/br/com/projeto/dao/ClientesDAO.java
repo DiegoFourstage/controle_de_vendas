@@ -4,7 +4,10 @@ import br.com.projeto.jdbc.ConnectionFactory;
 import br.com.projeto.model.Clientes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +23,7 @@ public class ClientesDAO {
         this.conexao = new ConnectionFactory().getConnection();
     }
 
+    // Cadastrar Clientes
     public void cadastraCliente(Clientes obj) {
         try {
             // Caminho sql para inserção de dados a tb_clientes
@@ -53,6 +57,51 @@ public class ClientesDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+
+    // Listar Clientes
+    public List<Clientes> listarClientes() {
+
+        try {
+            // Criando a lista 1º Passo
+            List<Clientes> lista = new ArrayList<>();
+
+            // Criando o comando sql de exibição 2º Passo
+            String sql = "select * from tb_clientes";
+
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            // Filtrar a tb_clientes            
+            while (rs.next()) {
+                // Caso encontre no meu banco de dados me atribui ao obj os dados da tabela que será exibida
+                Clientes obj = new Clientes();
+
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("estado"));
+
+                // Adicionando obj a lista
+                lista.add(obj);
+            }
+            return lista;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error" + e);
+            return null;
+        }
+
     }
 
 }

@@ -33,4 +33,7 @@ Obj.setUf(cboUf.getSelectedItem().toString());
 Após todos os dados inseridos instanciaremos nosso ClienteDAO, para acessar nosso método cadastrar e em parâmetros ele receberar o obj
 cliente
 
+Commit 10 Criando método listar Clientes
+Na classe ClientesDAO novo método public de uma lista de Clientes, a dentro desse método instanciaremos uma lista de Clientes isso dentro de um try e catch, comando sql para selecionar elementos, preparando a conexão,  e fazendo a filtragem com ResultSet, estrutura enquando a filtragem encontrar dados na tabela de dados obj receberar dados, esse dados será adicionado a nossa ArrayList criado no ínicio, após chaves return a uma lista e em catch return null
+
 
