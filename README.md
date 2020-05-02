@@ -34,6 +34,11 @@ Após todos os dados inseridos instanciaremos nosso ClienteDAO, para acessar noss
 cliente
 
 Commit 10 Criando método listar Clientes
-Na classe ClientesDAO novo método public de uma lista de Clientes, a dentro desse método instanciaremos uma lista de Clientes isso dentro de um try e catch, comando sql para selecionar elementos, preparando a conexão,  e fazendo a filtragem com ResultSet, estrutura enquando a filtragem encontrar dados na tabela de dados obj receberar dados, esse dados será adicionado a nossa ArrayList criado no ínicio, após chaves return a uma lista e em catch return null
+Na classe ClientesDAO novo método public de uma lista de Clientes, a dentro desse método instanciaremos uma lista de Clientes isso dentro de um try e catch, após comando sql para selecionar elementos, preparando a conexão,  e fazendo a filtragem com ResultSet, estrutura enquando a filtragem encontrar dados na tabela de dados, obj receberar dados, esse dados será adicionado a nossa ArrayList criado no ínicio, após chaves return a uma lista e em catch return null
+
+Commit 11 Implementando método listar Clientes
+Usaremos o DefaultTableModel, não entraremos muito em detalhes, mais seria bom pesquisar sobre ele, por não ser indicado por muitos, mais no nosso caso por enquanto ele nos suprime.
+Na classe FrmClientes, novo método public void listar, instanciaremos nosso ClietesDAO dao, criaremos uma List de Clientes, nossa lista ela receberar o nosso método listarClientes, abaixo chamaremos o DefaultTableModel dados ele será igual a nossa (DefaultTableModel)tblClientes.getModel(); assim modificando lá, limparemos a tabela dados.setNumRow que receberar zero, vamos percorrer a nossa lista com o for Clientes c : lista, a dentro dados.addRow um novo object[]{}); dentro das chaves do novo object
+c.getId(), c.getNome(), etc ... Após em projeto selecione JFrame e adicione novo evento WindowsActived, e chama o método listar, esse evento ele executarar ao abrir o sistema
 
 
