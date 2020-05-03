@@ -41,14 +41,4 @@ Usaremos o DefaultTableModel, não entraremos muito em detalhes, mais seria bom p
 Na classe FrmClientes, novo método public void listar, instanciaremos nosso ClietesDAO dao, criaremos uma List de Clientes, nossa lista ela receberar o nosso método listarClientes, abaixo chamaremos o DefaultTableModel dados ele será igual a nossa (DefaultTableModel)tblClientes.getModel(); assim modificando lá, limparemos a tabela dados.setNumRow que receberar zero, vamos percorrer a nossa lista com o for Clientes c : lista, a dentro dados.addRow um novo object[]{}); dentro das chaves do novo object
 c.getId(), c.getNome(), etc ... Após em projeto selecione JFrame e adicione novo evento WindowsActived, e chama o método listar, esse evento ele executarar ao abrir o sistema
 
-Commit 12 Commit anterior, Alterar e Excluir Cliente
-
-Criação de 2 métodos muito idêntico ao que já vimos, apenas mudará o código sql, em excluir apenas setaremos o id, já em alterar teremos que setar todos e mais o id no final que será nossa coluna 14 dos itens.
-
-
-Commit 13 Setando Tabela Cliente aos campos Vazios
-
-Antes de editar e excluir vamos setar os dados para os campos em brancos para facilitar as alterações, cada elemento é um número, por exemplo o id
-é representado pelo número 0, o nome é representado pelo número 1, e assim por diante, o exemplo é esse: txtId.setText(tbCliente.getValueAt(tblClientes.setSelectedRow(),0).toString());
-O meu obj txtId, como faço que pra ele sete na tabela pelaa linha, o elemento 0 seria nosso id convertido para uma String, assim mostrando no campo em branco, dica o combobox em vez de setText, ele fica setSelectedItem, antes dos códigos pode se colocar também o código que ao clicar ele vai até a minha  tabela de cadastro de Clientes já preenchido com os dados para assim ficar mais prático para fazer as alterações, segue como fazer, copie o nome do Painel: jTabbedPane1.setSelectedIndex(0); isso irar para o painel 0, assim que selecionar e clicar
 
