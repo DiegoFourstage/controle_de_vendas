@@ -52,3 +52,9 @@ Antes de editar e excluir vamos setar os dados para os campos em brancos para fa
 é representado pelo número 0, o nome é representado pelo número 1, e assim por diante, o exemplo é esse: txtId.setText(tbCliente.getValueAt(tblClientes.setSelectedRow(),0).toString());
 O meu obj txtId, como faço que pra ele sete na tabela pelaa linha, o elemento 0 seria nosso id convertido para uma String, assim mostrando no campo em branco, dica o combobox em vez de setText, ele fica setSelectedItem, antes dos códigos pode se colocar também o código que ao clicar ele vai até a minha  tabela de cadastro de Clientes já preenchido com os dados para assim ficar mais prático para fazer as alterações, segue como fazer, copie o nome do Painel: jTabbedPane1.setSelectedIndex(0); isso irar para o painel 0, assim que selecionar e clicar
 
+15 Implementando métodos Alterar e Excluir Clientes
+
+Na classe FrmClintes adicione novos eventos para os botões Alterar e Excluir, em excluir é só setar todos os objetos, no meu caso o meu Id ele
+é auto_increment não é necessário setarTexto, já no botão Excluir temos que chamar o obj id por que ele é a nossa referência
+
+

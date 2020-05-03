@@ -394,6 +394,11 @@ public class FrmCliente extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnNovo.setText("Novo");
 
@@ -526,6 +531,15 @@ public class FrmCliente extends javax.swing.JFrame {
         txtCity.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),12).toString());
         cboUf.setSelectedItem(tblClientes.getValueAt(tblClientes.getSelectedRow(),13).toString());
     }//GEN-LAST:event_tblClientesMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // Excluir Cliente
+        Clientes obj = new Clientes();
+        obj.setId(Integer.parseInt(txtCodigo.getText()));
+        
+        ClientesDAO dao = new ClientesDAO();
+        dao.excluirCliente(obj);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
