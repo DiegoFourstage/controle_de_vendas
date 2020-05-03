@@ -340,9 +340,14 @@ public class FrmCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Title 2", "Title 3", "Title 4"
+                "Código", "Nome", "Rg", "Cpf", "Email", "Tel", "Cel", "Cep", "End", "Nº", "Comple", "Bairro", "Cidade", "Estado"
             }
         ));
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblClientes);
 
         jLabel16.setText("Nome:");
@@ -448,7 +453,26 @@ public class FrmCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        // Alterar Cliente
+        // Adicionando dados para o obj, aonde método alterar receberar os dados alterados
+        Clientes obj = new Clientes();
+        obj.setId(Integer.parseInt(txtCodigo.getText()));
+        obj.setNome(txtNome.getText());
+        obj.setRg(txtRg.getText());
+        obj.setCpf(txtCpf.getText());
+        obj.setEmail(txtEmail.getText());
+        obj.setTelefone(txtTel.getText());
+        obj.setCelular(txtCel.getText());
+        obj.setCep(txtCep.getText());
+        obj.setEndereco(txtEnd.getText());
+        obj.setNumero(Integer.parseInt(txtNumber.getText()));
+        obj.setComplemento(txtComple.getText());
+        obj.setBairro(txtBairro.getText());
+        obj.setCidade(txtCity.getText());
+        obj.setUf(cboUf.getSelectedItem().toString());
+        
+        ClientesDAO dao = new ClientesDAO();
+        dao.alterarCliente(obj);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -481,6 +505,27 @@ public class FrmCliente extends javax.swing.JFrame {
         // Carregar a lista e exibi lá
         listar();
     }//GEN-LAST:event_formWindowActivated
+
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        // 
+        jTabbedPane1.setSelectedIndex(0); // Ao usar esse método esse comando ele mudarar pra tabela 0
+        
+        // Ao selecionar o item da tabela, me mostro nos campos vazios
+        txtCodigo.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),0).toString());
+        txtNome.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),1).toString());
+        txtRg.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),2).toString());
+        txtCpf.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),3).toString());
+        txtEmail.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),4).toString());
+        txtTel.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),5).toString());
+        txtCel.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),6).toString());
+        txtCep.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),7).toString());
+        txtEnd.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),8).toString());
+        txtNumber.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),9).toString());
+        txtComple.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),10).toString());
+        txtBairro.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),11).toString());
+        txtCity.setText(tblClientes.getValueAt(tblClientes.getSelectedRow(),12).toString());
+        cboUf.setSelectedItem(tblClientes.getValueAt(tblClientes.getSelectedRow(),13).toString());
+    }//GEN-LAST:event_tblClientesMouseClicked
 
     /**
      * @param args the command line arguments
