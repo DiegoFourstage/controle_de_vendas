@@ -61,4 +61,9 @@ Commit 16 Busca pelo nome e implementando métodos
 Neste commit algo parecido com o método listaClientes, apenas em parâmetros criaremos uma nova String nome, e no valor pst.setString ficarar 1, e mais o parâmetro nome nos demais não precisa alterar e sim agora implementar no Frm, renomeie à variável do campo pesquisar para txtPesquisar e o Botão para btnPesquisar, nos dois o método será igual apenas eventos que serão diferentes, no botão usaremos evento ActionPerformed, a dentro do método nova String nome que será igual ao nosso jTextfield txtPesquisar.getText(), concatene no início com o caractere %, ficará assim String nome = “%” + txtPesquisar.getText() + “%”; Toda pesquisa que se inicie com a letra escolhida filtrar e pegarar dados a sua tabela, após copie o que à de dentro do método listar, apenas trocaremos de método de listarClientes para buscarPorClientes pegando o parâmetro String nome, método criado crie um novo evento KeyPressed em txtPesquisar e cole o mesmo método, ao digitar exibirá nome a tabela
 
 
+Commit 17 Método limpar campos e implementando
+
+Nova classe Utilitários, método novo adicionado, implementando nos botões, quando botão for acionado, limpará todos os campos de textos
+
+
 
