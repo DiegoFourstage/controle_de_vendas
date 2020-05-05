@@ -20,8 +20,7 @@ cidade varchar(100),
 estado varchar(2)
 );
 
-describe projeto; -- Descrevendo os campos 
-select * from tb_clientes; -- Exibindo os clientes cadastrados
+describe tb_clientes; -- Descrevendo os campos select * from tb_clientes; -- Exibindo os clientes cadastrados
 
 -- -----------------------DADOS SQL-----------------------------------------------------------
 	-- Inserir cliente sql
@@ -34,4 +33,8 @@ delete from tb_clientes where id=?;
 	-- Alterar Cliente
 update tb_clientes set nome=?, rg=?, cpf=?, email=?, telefone=?, celular=?, 
 cep=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=? where id=?;
+
+-- Busca por nome 
+select * from tb_clientes where nome like 'a%';
 -- ----------------------------------------------------------------------------------
+use projeto;
