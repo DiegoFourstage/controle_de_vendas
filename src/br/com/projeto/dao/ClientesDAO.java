@@ -156,8 +156,8 @@ public class ClientesDAO {
             PreparedStatement pst = conexao.prepareStatement(sql);
             pst.setString(1, nome);
             ResultSet rs = pst.executeQuery();
-            
-            List <Clientes> lista = new ArrayList<>();
+
+            List<Clientes> lista = new ArrayList<>();
 
             while (rs.next()) {
                 Clientes obj = new Clientes();
@@ -176,12 +176,45 @@ public class ClientesDAO {
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));
                 obj.setUf(rs.getString("estado"));
-               
+
                 lista.add(obj);
             }
             return lista;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+    
+    //Consulta de Cliente pelo nome no painel cadastro de cliente
+    public Clientes consultaClientePainelCadastro(String nome) {
+        try {
+            String sql = "select * from tb_clientes where nome = ?";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome);
+            ResultSet rs = pst.executeQuery();
+            
+            Clientes obj = new Clientes();
+            if (rs.next()) {
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("estado"));
+            }
+            return obj;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado " + e);
             return null;
         }
     }

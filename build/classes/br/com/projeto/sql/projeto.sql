@@ -35,5 +35,7 @@ update tb_clientes set nome=?, rg=?, cpf=?, email=?, telefone=?, celular=?,
 cep=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=? where id=?;
 	-- Busca por nome 
 select * from tb_clientes where nome like 'y%';
+	-- Consulta por nome 
+    select * from tb_clientes where nome = ?;
 -- ----------------------------------------------------------------------------------
 use projeto;

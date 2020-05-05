@@ -65,5 +65,8 @@ Commit 17 Método limpar campos e implementando
 
 Nova classe Utilitários, método novo adicionado, implementando nos botões, quando botão for acionado, limpará todos os campos de textos
 
+Commit 18 Consulta por Cliente(Painel Cadastro)
+Método usado para consulta de cpf, mais usaremos a consulta por nome, para que que essa consulta seja feita, o nome do cliente tem que ser indêntico, se não ele retornarar null, com mensagem de Cliente não encontrado 
+
 
 

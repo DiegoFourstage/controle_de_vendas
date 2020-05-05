@@ -9,6 +9,7 @@ import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Utilitarios;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -89,6 +90,7 @@ public class FrmCliente extends javax.swing.JFrame {
         txtCpf = new javax.swing.JFormattedTextField();
         txtTel = new javax.swing.JFormattedTextField();
         txtCep = new javax.swing.JFormattedTextField();
+        btnConsulta = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
@@ -198,6 +200,13 @@ public class FrmCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        btnConsulta.setText("Pesquisar");
+        btnConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCadastroLayout = new javax.swing.GroupLayout(jPanelCadastro);
         jPanelCadastro.setLayout(jPanelCadastroLayout);
         jPanelCadastroLayout.setHorizontalGroup(
@@ -209,11 +218,13 @@ public class FrmCliente extends javax.swing.JFrame {
                         .addGroup(jPanelCadastroLayout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnConsulta))
                         .addGroup(jPanelCadastroLayout.createSequentialGroup()
                             .addGroup(jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel7)
@@ -277,12 +288,13 @@ public class FrmCliente extends javax.swing.JFrame {
         jPanelCadastroLayout.setVerticalGroup(
             jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadastroLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addGroup(jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsulta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -332,7 +344,7 @@ public class FrmCliente extends javax.swing.JFrame {
                         .addGroup(jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cboUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastrar", jPanelCadastro);
@@ -504,7 +516,7 @@ public class FrmCliente extends javax.swing.JFrame {
 
         ClientesDAO dao = new ClientesDAO();
         dao.alterarCliente(obj);
-        
+
         new Utilitarios().limpaTela(jPanelCadastro);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -568,7 +580,7 @@ public class FrmCliente extends javax.swing.JFrame {
 
         ClientesDAO dao = new ClientesDAO();
         dao.excluirCliente(obj);
-        
+
         new Utilitarios().limpaTela(jPanelCadastro);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -640,6 +652,39 @@ public class FrmCliente extends javax.swing.JFrame {
         new Utilitarios().limpaTela(jPanelCadastro);
     }//GEN-LAST:event_btnNovoActionPerformed
 
+    private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
+        // Pesquisar cliente no painel cadastrar Cliente
+
+        String nome = txtNome.getText();
+        Clientes obj = new Clientes();
+        ClientesDAO dao = new ClientesDAO();
+
+        obj = dao.consultaClientePainelCadastro(nome);
+
+        if (obj.getNome() != null) {
+            // Exbir objetos nos campo de textos referente aos nomes
+            txtCodigo.setText(String.valueOf(obj.getId()));
+            txtNome.setText(obj.getNome());
+            txtRg.setText(obj.getRg());
+            txtCpf.setText(obj.getCpf());
+            txtEmail.setText(obj.getEmail());
+            txtTel.setText(obj.getTelefone());
+            txtCel.setText(obj.getCelular());
+            txtCep.setText(obj.getCep());
+            txtEnd.setText(obj.getEndereco());
+            txtNumber.setText(String.valueOf(obj.getNumero()));
+            txtComple.setText(obj.getComplemento());
+            txtBairro.setText(obj.getBairro());
+            txtCity.setText(obj.getCidade());
+            cboUf.setSelectedItem(obj.getUf());
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado !");
+            new Utilitarios().limpaTela(jPanelCadastro);
+        }
+
+
+    }//GEN-LAST:event_btnConsultaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -677,6 +722,7 @@ public class FrmCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnConsulta;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
