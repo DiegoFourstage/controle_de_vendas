@@ -56,7 +56,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPaneFun = new javax.swing.JTabbedPane();
         jPanelCadastro = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
@@ -136,7 +136,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPaneFun.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanelCadastro.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -357,7 +357,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Cadastrar", jPanelCadastro);
+        jTabbedPaneFun.addTab("Cadastrar", jPanelCadastro);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -409,7 +409,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Consultar", jPanel4);
+        jTabbedPaneFun.addTab("Consultar", jPanel4);
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -431,7 +431,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPaneFun)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(207, 207, 207)
@@ -452,7 +452,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPaneFun, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
@@ -480,7 +480,24 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionariosMouseClicked
-
+        jTabbedPaneFun.setSelectedIndex(0);
+        txtCodigo.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 0).toString());
+        txtNome.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 1).toString());
+        txtRg.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 2).toString());
+        txtCpf.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 3).toString());
+        txtEmail.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 4).toString());
+        txtSenha.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 5).toString());
+        txtCargo.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 6).toString());
+        cboNivel.setSelectedItem(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 7).toString());
+        txtTel.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 8).toString());
+        txtCel.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 9).toString());
+        txtCep.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 10).toString());
+        txtEnd.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 11).toString());
+        txtNumber.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 12).toString());
+        txtComple.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 13).toString());
+        txtBairro.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 14).toString());
+        txtCity.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 15).toString());
+        cboUf.setSelectedItem(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 16).toString());
 
     }//GEN-LAST:event_tblFuncionariosMouseClicked
 
@@ -581,7 +598,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelCadastro;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPaneFun;
     private javax.swing.JTable tblFuncionarios;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCargo;
