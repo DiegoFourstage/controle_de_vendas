@@ -7,12 +7,43 @@ package br.com.projeto.views;
 
 import br.com.projeto.dao.FuncionariosDAO;
 import br.com.projeto.model.Funcionarios;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author D1350
  */
 public class FrmFuncionarios extends javax.swing.JFrame {
+
+    //DefaultTableModel
+    public void listar() {
+        DefaultTableModel dados = (DefaultTableModel) tblFuncionarios.getModel();
+        FuncionariosDAO dao = new FuncionariosDAO();
+        List<Funcionarios> lista = dao.listarFuncionarios();
+
+        for (Funcionarios f : lista) {
+            dados.addRow(new Object[]{
+                f.getId(),
+                f.getNome(),
+                f.getRg(),
+                f.getCpf(),
+                f.getEmail(),
+                f.getSenha(),
+                f.getCargo(),
+                f.getNivel_Acesso(),
+                f.getTelefone(),
+                f.getCelular(),
+                f.getCep(),
+                f.getEndereco(),
+                f.getNumero(),
+                f.getComplemento(),
+                f.getBairro(),
+                f.getCidade(),
+                f.getUf()
+            });
+        }
+    }
 
     public FrmFuncionarios() {
         initComponents();
@@ -74,6 +105,11 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         btnNovo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -451,33 +487,31 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // Cadastrar Funcionarios
         Funcionarios obj = new Funcionarios();
-        Boolean cadastrado = true;
 
-        if (cadastrado == true) {
-            obj.setNome(txtNome.getText());
-            obj.setRg(txtRg.getText());
-            obj.setCpf(txtCpf.getText());
-            obj.setEmail(txtEmail.getText());
-            obj.setSenha(txtSenha.getText());
-            obj.setCargo(txtCargo.getText());
-            obj.setNivel_Acesso(cboNivel.getSelectedItem().toString());
-            obj.setTelefone(txtTel.getText());
-            obj.setCelular(txtCel.getText());
-            obj.setCep(txtCep.getText());
-            obj.setEndereco(txtEnd.getText());
-            obj.setNumero(Integer.parseInt(txtNumber.getText()));
-            obj.setComplemento(txtComple.getText());
-            obj.setBairro(txtBairro.getText());
-            obj.setCidade(txtCity.getText());
-            obj.setUf(cboUf.getSelectedItem().toString());
-            FuncionariosDAO dao = new FuncionariosDAO();
-            dao.cadastrar(obj);
-        } else {
-            txtNome.setText(null);
-        }
-
-
+        obj.setNome(txtNome.getText());
+        obj.setRg(txtRg.getText());
+        obj.setCpf(txtCpf.getText());
+        obj.setEmail(txtEmail.getText());
+        obj.setSenha(txtSenha.getText());
+        obj.setCargo(txtCargo.getText());
+        obj.setNivel_Acesso(cboNivel.getSelectedItem().toString());
+        obj.setTelefone(txtTel.getText());
+        obj.setCelular(txtCel.getText());
+        obj.setCep(txtCep.getText());
+        obj.setEndereco(txtEnd.getText());
+        obj.setNumero(Integer.parseInt(txtNumber.getText()));
+        obj.setComplemento(txtComple.getText());
+        obj.setBairro(txtBairro.getText());
+        obj.setCidade(txtCity.getText());
+        obj.setUf(cboUf.getSelectedItem().toString());
+        FuncionariosDAO dao = new FuncionariosDAO();
+        dao.cadastrar(obj);
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // Listando Funcionarios
+        listar();
+    }//GEN-LAST:event_formWindowActivated
     /**
      * @param args the command line arguments
      */
