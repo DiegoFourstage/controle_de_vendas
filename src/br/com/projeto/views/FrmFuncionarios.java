@@ -5,49 +5,14 @@
  */
 package br.com.projeto.views;
 
-import br.com.projeto.dao.ClientesDAO;
-import br.com.projeto.model.Clientes;
-import br.com.projeto.model.Utilitarios;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import br.com.projeto.dao.FuncionariosDAO;
+import br.com.projeto.model.Funcionarios;
 
 /**
  *
  * @author D1350
  */
 public class FrmFuncionarios extends javax.swing.JFrame {
-
-    // Método listar na tabela, modo de exibir tabela 
-    public void listar() {
-
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.listarClientes();
-        //Modificando a nossa tabela para Default...
-        DefaultTableModel dados = (DefaultTableModel) tblFuncionarios.getModel();
-        // Limpar a tabela
-        dados.setNumRows(0);
-
-        for (Clientes c : lista) {
-            dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf()
-            });
-        }
-
-    }
 
     public FrmFuncionarios() {
         initComponents();
@@ -94,7 +59,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         jLabel18 = new javax.swing.JLabel();
-        txtComple1 = new javax.swing.JTextField();
+        txtCargo = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         cboNivel = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
@@ -109,11 +74,6 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         btnNovo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -207,11 +167,6 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         }
 
         btnConsulta.setText("Pesquisar");
-        btnConsulta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultaActionPerformed(evt);
-            }
-        });
 
         jLabel17.setText("Senha:");
 
@@ -236,7 +191,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jLabel18)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtComple1)
+                            .addComponent(txtCargo)
                             .addGap(12, 12, 12)
                             .addComponent(jLabel19)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -327,7 +282,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
-                    .addComponent(txtComple1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -387,18 +342,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
         jLabel16.setText("Nome:");
 
-        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPesquisarKeyPressed(evt);
-            }
-        });
-
         btnPesquisar.setText("Pesquisar");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -439,25 +383,10 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         btnAlterar.setText("Alterar");
-        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarActionPerformed(evt);
-            }
-        });
 
         btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
 
         btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -514,196 +443,41 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // Alterar Cliente
-        // Adicionando dados para o obj, aonde método alterar receberar os dados alterados
-        Clientes obj = new Clientes();
-        obj.setId(Integer.parseInt(txtCodigo.getText()));
-        obj.setNome(txtNome.getText());
-        obj.setRg(txtRg.getText());
-        obj.setCpf(txtCpf.getText());
-        obj.setEmail(txtEmail.getText());
-        obj.setTelefone(txtTel.getText());
-        obj.setCelular(txtCel.getText());
-        obj.setCep(txtCep.getText());
-        obj.setEndereco(txtEnd.getText());
-        obj.setNumero(Integer.parseInt(txtNumber.getText()));
-        obj.setComplemento(txtComple.getText());
-        obj.setBairro(txtBairro.getText());
-        obj.setCidade(txtCity.getText());
-        obj.setUf(cboUf.getSelectedItem().toString());
-
-        ClientesDAO dao = new ClientesDAO();
-        dao.alterarCliente(obj);
-
-        new Utilitarios().limpaTela(jPanelCadastro);
-    }//GEN-LAST:event_btnAlterarActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // Salvando cliente
-        // Adicionando dados inserido nos campos e passando para obj, e adicionado ao nosso clienteDAO
-
-        Clientes obj = new Clientes(); // Nosso objeto
-        obj.setNome(txtNome.getText());
-        obj.setRg(txtRg.getText());
-        obj.setCpf(txtCpf.getText());
-        obj.setEmail(txtEmail.getText());
-        obj.setTelefone(txtTel.getText());
-        obj.setCelular(txtCel.getText());
-        obj.setCep(txtCep.getText());
-        obj.setEndereco(txtEnd.getText());
-        obj.setNumero(Integer.parseInt(txtNumber.getText()));
-        obj.setComplemento(txtComple.getText());
-        obj.setBairro(txtBairro.getText());
-        obj.setCidade(txtCity.getText());
-        obj.setUf(cboUf.getSelectedItem().toString());
-
-        // Nosso ClienteDAO
-        ClientesDAO dao = new ClientesDAO();
-        dao.cadastraCliente(obj); // dao e nosso método cadastrar Cliente adionando obj, dados que foram
-        // inserido em FrmCliente      
-        // Após par verificar entre no seu WordKBench e de um select * from tb_clientes
-        new Utilitarios().limpaTela(jPanelCadastro);
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // Carregar a lista e exibi lá
-        listar();
-    }//GEN-LAST:event_formWindowActivated
-
     private void tblFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionariosMouseClicked
-        // 
-        jTabbedPane1.setSelectedIndex(0); // Ao usar esse método esse comando ele mudarar pra tabela 0
 
-        // Ao selecionar o item da tabela, me mostro nos campos vazios
-        txtCodigo.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 0).toString());
-        txtNome.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 1).toString());
-        txtRg.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 2).toString());
-        txtCpf.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 3).toString());
-        txtEmail.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 4).toString());
-        txtTel.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 5).toString());
-        txtCel.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 6).toString());
-        txtCep.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 7).toString());
-        txtEnd.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 8).toString());
-        txtNumber.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 9).toString());
-        txtComple.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 10).toString());
-        txtBairro.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 11).toString());
-        txtCity.setText(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 12).toString());
-        cboUf.setSelectedItem(tblFuncionarios.getValueAt(tblFuncionarios.getSelectedRow(), 13).toString());
+
     }//GEN-LAST:event_tblFuncionariosMouseClicked
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // Excluir Cliente
-        Clientes obj = new Clientes();
-        obj.setId(Integer.parseInt(txtCodigo.getText()));
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // Cadastrar Funcionarios
+        Funcionarios obj = new Funcionarios();
+        Boolean cadastrado = true;
 
-        ClientesDAO dao = new ClientesDAO();
-        dao.excluirCliente(obj);
-
-        new Utilitarios().limpaTela(jPanelCadastro);
-    }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // Buscar cliente pelo nome em botão pesquisar
-        String nome = "%" + txtPesquisar.getText() + "%";
-
-        DefaultTableModel dados = (DefaultTableModel) tblFuncionarios.getModel();
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.buscarPorNome(nome);
-
-        dados.setNumRows(0);
-
-        for (Clientes c : lista) {
-            dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf()
-            });
-
-        }
-
-    }//GEN-LAST:event_btnPesquisarActionPerformed
-
-    private void txtPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyPressed
-        // TODO add your handling code here:
-        String nome = "%" + txtPesquisar.getText() + "%";
-
-        DefaultTableModel dados = (DefaultTableModel) tblFuncionarios.getModel();
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.buscarPorNome(nome);
-
-        dados.setNumRows(0);
-
-        for (Clientes c : lista) {
-            dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf()
-            });
-
-        }
-    }//GEN-LAST:event_txtPesquisarKeyPressed
-
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // Limpar a Tela para adicionar novo cliente
-        new Utilitarios().limpaTela(jPanelCadastro);
-    }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
-        // Pesquisar cliente no painel cadastrar Cliente
-
-        String nome = txtNome.getText();
-        Clientes obj = new Clientes();
-        ClientesDAO dao = new ClientesDAO();
-
-        obj = dao.consultaClientePainelCadastro(nome);
-
-        if (obj.getNome() != null) {
-            // Exbir objetos nos campo de textos referente aos nomes
-            txtCodigo.setText(String.valueOf(obj.getId()));
-            txtNome.setText(obj.getNome());
-            txtRg.setText(obj.getRg());
-            txtCpf.setText(obj.getCpf());
-            txtEmail.setText(obj.getEmail());
-            txtTel.setText(obj.getTelefone());
-            txtCel.setText(obj.getCelular());
-            txtCep.setText(obj.getCep());
-            txtEnd.setText(obj.getEndereco());
-            txtNumber.setText(String.valueOf(obj.getNumero()));
-            txtComple.setText(obj.getComplemento());
-            txtBairro.setText(obj.getBairro());
-            txtCity.setText(obj.getCidade());
-            cboUf.setSelectedItem(obj.getUf());
+        if (cadastrado == true) {
+            obj.setNome(txtNome.getText());
+            obj.setRg(txtRg.getText());
+            obj.setCpf(txtCpf.getText());
+            obj.setEmail(txtEmail.getText());
+            obj.setSenha(txtSenha.getText());
+            obj.setCargo(txtCargo.getText());
+            obj.setNivel_Acesso(cboNivel.getSelectedItem().toString());
+            obj.setTelefone(txtTel.getText());
+            obj.setCelular(txtCel.getText());
+            obj.setCep(txtCep.getText());
+            obj.setEndereco(txtEnd.getText());
+            obj.setNumero(Integer.parseInt(txtNumber.getText()));
+            obj.setComplemento(txtComple.getText());
+            obj.setBairro(txtBairro.getText());
+            obj.setCidade(txtCity.getText());
+            obj.setUf(cboUf.getSelectedItem().toString());
+            FuncionariosDAO dao = new FuncionariosDAO();
+            dao.cadastrar(obj);
         } else {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado !");
-            new Utilitarios().limpaTela(jPanelCadastro);
+            txtNome.setText(null);
         }
 
 
-    }//GEN-LAST:event_btnConsultaActionPerformed
-
+    }//GEN-LAST:event_btnSalvarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -776,12 +550,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblFuncionarios;
     private javax.swing.JTextField txtBairro;
+    private javax.swing.JTextField txtCargo;
     private javax.swing.JFormattedTextField txtCel;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtComple;
-    private javax.swing.JTextField txtComple1;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEnd;
