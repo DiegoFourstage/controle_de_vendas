@@ -69,7 +69,7 @@ Commit 18 Consulta por Cliente(Painel Cadastro)
 Método usado para consulta de cpf, mais usaremos a consulta por nome, para que que essa consulta seja feita, o nome do cliente tem que ser indêntico, se não ele retornarar null, com mensagem de Cliente não encontrado 
 
 Commit 19 Criando novo FormJFrame Funcionários
-Copiaremos FrmCleintes, o mesmo design para funcionários e refatorar com o nome de FrmFuncionarios, adicionando nova tabela sql tb_funcionarios e elementos novos adicionado, no design do projeto novos itens senha, cargo e nível de acesso , adicione também os itens a tbl_fucionarios em suas sequências
+Copiaremos FrmCleintes, o mesmo design para funcionários e refatorar com o nome de FrmFuncionarios, adicionando nova tabela sql tb_funcionarios e elementos novos adicionado, no design do projeto novos itens senha, cargo e nível de acesso , adicione também os itens a tbl_fucionarios em suas sequências.
 
 
 

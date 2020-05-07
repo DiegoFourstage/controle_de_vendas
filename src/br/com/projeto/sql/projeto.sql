@@ -60,7 +60,8 @@ cidade varchar(100),
 estado varchar(2)
 );
 
-
+describe tb_funcionarios;
+select * from tb_funcionarios;
 
 
 

@@ -21,6 +21,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         DefaultTableModel dados = (DefaultTableModel) tblFuncionarios.getModel();
         FuncionariosDAO dao = new FuncionariosDAO();
         List<Funcionarios> lista = dao.listarFuncionarios();
+        dados.setNumRows(0);
 
         for (Funcionarios f : lista) {
             dados.addRow(new Object[]{
@@ -419,8 +420,18 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnNovo.setText("Novo");
 
@@ -521,14 +532,45 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         obj.setBairro(txtBairro.getText());
         obj.setCidade(txtCity.getText());
         obj.setUf(cboUf.getSelectedItem().toString());
+
         FuncionariosDAO dao = new FuncionariosDAO();
         dao.cadastrar(obj);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // Listando Funcionarios
+        // Listando Funcionarios        
         listar();
     }//GEN-LAST:event_formWindowActivated
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // Alterar Funcionários
+        Funcionarios obj = new Funcionarios();
+
+        obj.setId(Integer.parseInt(txtCodigo.getText()));
+        obj.setNome(txtNome.getText());
+        obj.setRg(txtRg.getText());
+        obj.setCpf(txtCpf.getText());
+        obj.setEmail(txtEmail.getText());
+        obj.setSenha(txtSenha.getText());
+        obj.setCargo(txtCargo.getText());
+        obj.setNivel_Acesso(cboNivel.getSelectedItem().toString());
+        obj.setTelefone(txtTel.getText());
+        obj.setCelular(txtCel.getText());
+        obj.setCep(txtCep.getText());
+        obj.setEndereco(txtEnd.getText());
+        obj.setNumero(Integer.parseInt(txtNumber.getText()));
+        obj.setComplemento(txtComple.getText());
+        obj.setBairro(txtBairro.getText());
+        obj.setCidade(txtCity.getText());
+        obj.setUf(cboUf.getSelectedItem().toString());
+
+        FuncionariosDAO dao = new FuncionariosDAO();
+        dao.alterarFuncionario(obj);
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // 
+    }//GEN-LAST:event_btnExcluirActionPerformed
     /**
      * @param args the command line arguments
      */
