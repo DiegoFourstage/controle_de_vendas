@@ -380,6 +380,11 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jLabel16.setText("Nome:");
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -571,6 +576,39 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // 
     }//GEN-LAST:event_btnExcluirActionPerformed
+    // Painel 2, implementando método pesquisar pelo nome
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // Pesquisar por funcionario Usando o botão Pesquisar Funcionarios
+        String nome = "%" + txtPesquisar.getText() + "%";
+
+        DefaultTableModel dados = (DefaultTableModel) tblFuncionarios.getModel();
+        FuncionariosDAO dao = new FuncionariosDAO();
+        List<Funcionarios> lista = dao.pesquisaNome(nome);
+        dados.setNumRows(0);
+
+        for (Funcionarios f : lista) {
+            dados.addRow(new Object[]{
+                f.getId(),
+                f.getNome(),
+                f.getRg(),
+                f.getCpf(),
+                f.getEmail(),
+                f.getSenha(),
+                f.getCargo(),
+                f.getNivel_Acesso(),
+                f.getTelefone(),
+                f.getCelular(),
+                f.getCep(),
+                f.getEndereco(),
+                f.getNumero(),
+                f.getComplemento(),
+                f.getBairro(),
+                f.getCidade(),
+                f.getUf()
+            });
+        }
+
+    }//GEN-LAST:event_btnPesquisarActionPerformed
     /**
      * @param args the command line arguments
      */
