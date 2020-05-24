@@ -138,7 +138,7 @@ public class FuncionariosDAO {
             PreparedStatement pst = conexao.prepareStatement(sql);
             pst.setString(1, nome);
             ResultSet rs = pst.executeQuery();
-           
+
             List<Funcionarios> lista = new ArrayList<>();
 
             while (rs.next()) {
@@ -169,6 +169,31 @@ public class FuncionariosDAO {
             JOptionPane.showMessageDialog(null, e);
         }
         return null;
+    }
+
+    // Método efetuar o Login
+    public void efetuarLogin(String email, String senha) {
+        try {
+            String sql = "select * from tb_funcionarios where email=? and senha=?";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, email);
+            pst.setString(2, senha);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Login efetuado com sucesso !");
+
+                // Iremos criar a tela de Menu após esse método e implementação
+//                FrmMenu tela = new FrmMenu();
+//                tela.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Email ou senha incorretos !");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
 }

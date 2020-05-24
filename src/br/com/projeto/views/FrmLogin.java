@@ -5,17 +5,22 @@
  */
 package br.com.projeto.views;
 
+import br.com.projeto.dao.FuncionariosDAO;
+import br.com.projeto.jdbc.ConnectionFactory;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author D1350
  */
 public class FrmLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmLogin
-     */
+    Connection conexao;
+
     public FrmLogin() {
         initComponents();
+        this.conexao = new ConnectionFactory().getConnection();
     }
 
     /**
@@ -70,6 +75,11 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel3.setText("Senha:");
 
         btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
 
@@ -130,6 +140,19 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // Implementando o método efetuarLogin ao clicar em entrar
+        String email = txtEmail.getText();
+        String senha = txtSenha.getText();
+
+        if (txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos ");
+        } else {
+            FuncionariosDAO dao = new FuncionariosDAO();
+            dao.efetuarLogin(email, senha);
+        }
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments

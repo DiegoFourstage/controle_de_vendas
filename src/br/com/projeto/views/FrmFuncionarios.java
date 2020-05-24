@@ -445,6 +445,11 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -650,6 +655,10 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txtPesquisarKeyPressed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNovoActionPerformed
     /**
      * @param args the command line arguments
      */
