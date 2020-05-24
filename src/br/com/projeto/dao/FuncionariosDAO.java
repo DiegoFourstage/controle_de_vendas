@@ -138,7 +138,7 @@ public class FuncionariosDAO {
             PreparedStatement pst = conexao.prepareStatement(sql);
             pst.setString(1, nome);
             ResultSet rs = pst.executeQuery();
-
+           
             List<Funcionarios> lista = new ArrayList<>();
 
             while (rs.next()) {

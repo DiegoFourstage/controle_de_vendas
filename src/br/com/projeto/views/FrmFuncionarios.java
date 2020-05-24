@@ -379,6 +379,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
         jLabel16.setText("Nome:");
 
+        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPesquisarKeyPressed(evt);
+            }
+        });
+
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -609,6 +615,41 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void txtPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyPressed
+        // Ao apertar a Tecla enter executar a pesquisa de Funcionarios no painel 2
+
+        String nome = "%" + txtPesquisar.getText() + "%";
+
+        DefaultTableModel dados = (DefaultTableModel) tblFuncionarios.getModel();
+        FuncionariosDAO dao = new FuncionariosDAO();
+        List<Funcionarios> lista = dao.pesquisaNome(nome);
+        dados.setNumRows(0);
+
+        for (Funcionarios f : lista) {
+            dados.addRow(new Object[]{
+                f.getId(),
+                f.getNome(),
+                f.getRg(),
+                f.getCpf(),
+                f.getEmail(),
+                f.getSenha(),
+                f.getCargo(),
+                f.getNivel_Acesso(),
+                f.getTelefone(),
+                f.getCelular(),
+                f.getCep(),
+                f.getEndereco(),
+                f.getNumero(),
+                f.getComplemento(),
+                f.getBairro(),
+                f.getCidade(),
+                f.getUf()
+
+            });
+        }
+
+    }//GEN-LAST:event_txtPesquisarKeyPressed
     /**
      * @param args the command line arguments
      */
