@@ -187,11 +187,12 @@ public class FuncionariosDAO {
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso !");
                 //Iremos criar a tela de Menu após esse método e implementação
                 FrmMenu tela = new FrmMenu();
+                tela.usuario = rs.getString("nome");
                 tela.setVisible(true);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Email ou senha incorretos !");
-                FrmLogin login = new FrmLogin();
+                FrmLogin login = new FrmLogin();                
                 login.setVisible(true);
             }
 
