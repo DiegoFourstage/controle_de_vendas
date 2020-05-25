@@ -42,7 +42,7 @@ public class FrmLogin extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sisteme de Login");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -149,8 +149,11 @@ public class FrmLogin extends javax.swing.JFrame {
         if (txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos ");
         } else {
+
             FuncionariosDAO dao = new FuncionariosDAO();
             dao.efetuarLogin(email, senha);
+            this.dispose();
+
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 

@@ -7,11 +7,14 @@ package br.com.projeto.dao;
 
 import br.com.projeto.jdbc.ConnectionFactory;
 import br.com.projeto.model.Funcionarios;
+import br.com.projeto.views.FrmLogin;
+import br.com.projeto.views.FrmMenu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -182,13 +185,14 @@ public class FuncionariosDAO {
 
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso !");
-
-                // Iremos criar a tela de Menu após esse método e implementação
-//                FrmMenu tela = new FrmMenu();
-//                tela.setVisible(true);
+                //Iremos criar a tela de Menu após esse método e implementação
+                FrmMenu tela = new FrmMenu();
+                tela.setVisible(true);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Email ou senha incorretos !");
+                FrmLogin login = new FrmLogin();
+                login.setVisible(true);
             }
 
         } catch (Exception e) {
