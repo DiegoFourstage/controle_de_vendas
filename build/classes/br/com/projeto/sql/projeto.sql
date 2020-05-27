@@ -63,6 +63,25 @@ estado varchar(2)
 describe tb_funcionarios;
 select * from tb_funcionarios;
 
+create table tb_fornecedor(
+id int primary key auto_increment,
+nome varchar(50), 
+cnpj varchar (50) ,
+email varchar (200),
+telefone varchar(30),
+celular varchar(30),
+cep varchar(100),
+endereco varchar(255),
+numero int,
+complemento varchar(200),
+bairro varchar(100),
+cidade varchar(100),
+estado varchar(2)
+);
+
+describe tb_fornecedor;
+select * from tb_fornecedor;
+
 
 
 use projeto;
