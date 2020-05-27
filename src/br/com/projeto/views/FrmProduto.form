@@ -170,7 +170,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnExcluir" linkSize="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="cbpFornecedor" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cboFornecedor" min="-2" pref="188" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -205,7 +205,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbpFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cboFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="35" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -254,14 +254,17 @@
                     <Property name="text" type="java.lang.String" value="Fornecedor:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cbpFornecedor">
+                <Component class="javax.swing.JComboBox" name="cboFornecedor">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="cboFornecedorAncestorAdded"/>
+                  </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnConsulta">

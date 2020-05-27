@@ -5,6 +5,10 @@
  */
 package br.com.projeto.views;
 
+import br.com.projeto.dao.FornecedorDAO;
+import br.com.projeto.model.Fornecedor;
+import java.util.List;
+
 /**
  *
  * @author D1350
@@ -35,7 +39,7 @@ public class FrmProduto extends javax.swing.JFrame {
         txtPreco = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        cbpFornecedor = new javax.swing.JComboBox<>();
+        cboFornecedor = new javax.swing.JComboBox();
         btnConsulta = new javax.swing.JButton();
         txtQtdEstoque = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
@@ -92,6 +96,16 @@ public class FrmProduto extends javax.swing.JFrame {
 
         jLabel15.setText("Fornecedor:");
 
+        cboFornecedor.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cboFornecedorAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         btnConsulta.setText("Pesquisar");
 
         btnNovo.setText("Novo");
@@ -140,7 +154,7 @@ public class FrmProduto extends javax.swing.JFrame {
                                 .addComponent(btnAlterar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnExcluir))
-                            .addComponent(cbpFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cboFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(223, Short.MAX_VALUE))
         );
 
@@ -169,7 +183,7 @@ public class FrmProduto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(cbpFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
@@ -264,6 +278,16 @@ public class FrmProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cboFornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cboFornecedorAncestorAdded
+        FornecedorDAO dao = new FornecedorDAO();
+        List<Fornecedor> listarFornecedor = dao.listar();
+        cboFornecedor.removeAll();
+        
+        for(Fornecedor f : listarFornecedor){
+            cboFornecedor.addItem(f);
+        }
+    }//GEN-LAST:event_cboFornecedorAncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -307,7 +331,7 @@ public class FrmProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cbpFornecedor;
+    private javax.swing.JComboBox cboFornecedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
