@@ -82,6 +82,21 @@ estado varchar(2)
 describe tb_fornecedor;
 select * from tb_fornecedor;
 
+-- ----------------------------------------------------------------------------------
 
+-------------------------- Relacionado ao Produtos ----------------------------------
+
+create table tb_produtos (
+id int primary key auto_increment,
+descricao varchar(100),
+preco decimal (10,2),
+qtd_estoque int,
+for_id int, -- Chave Estrangeira
+
+foreign key (for_id) references tb_fornecedor(id)
+);
+
+describe tb_produtos;
+select * from tb_produtos;
 
 use projeto;
