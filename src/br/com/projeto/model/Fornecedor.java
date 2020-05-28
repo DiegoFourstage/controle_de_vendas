@@ -10,12 +10,11 @@ package br.com.projeto.model;
  * @author D1350
  */
 public class Fornecedor extends Clientes {
-    
+
     // Atributos
     private String cnpj;
-    
-    //Getters e Setters
 
+    //Getters e Setters
     public String getCnpj() {
         return cnpj;
     }
@@ -23,12 +22,11 @@ public class Fornecedor extends Clientes {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.getNome();
+
     }
-       
-    
-    
+
 }

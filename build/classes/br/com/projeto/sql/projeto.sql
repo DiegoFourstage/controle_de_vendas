@@ -99,4 +99,10 @@ foreign key (for_id) references tb_fornecedor(id)
 describe tb_produtos;
 select * from tb_produtos;
 
-use projeto;
+-- Para poder fazer intereção de dados de fornecedor em produtos 
+-- precisamos fazer o inner join
+
+select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p
+inner join tb_fornecedor as f on (p.for_id = f.id);
+
+use projeto;	

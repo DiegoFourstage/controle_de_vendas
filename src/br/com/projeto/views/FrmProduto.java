@@ -10,6 +10,7 @@ import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.model.Fornecedor;
 import br.com.projeto.model.Produtos;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,7 +19,22 @@ import java.util.List;
 public class FrmProduto extends javax.swing.JFrame {
 
     // Método listar na tabela, modo de exibir tabela 
-  
+    public void listar() {
+        DefaultTableModel dados = (DefaultTableModel) tblProdutos.getModel();
+        ProdutoDAO dao = new ProdutoDAO();
+        List<Produtos> lista = dao.listarProduto();
+        dados.setNumRows(0);
+
+        for (Produtos p : lista) {
+            dados.addRow(new Object[]{
+                p.getId(),
+                p.getDescricao(),
+                p.getPreco(),
+                p.getQtdEstoque(),
+                p.getFornecedor().getNome()
+            });
+        }
+    }
 
     public FrmProduto() {
         initComponents();
@@ -56,6 +72,11 @@ public class FrmProduto extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -289,8 +310,8 @@ public class FrmProduto extends javax.swing.JFrame {
         FornecedorDAO dao = new FornecedorDAO();
         List<Fornecedor> listarFornecedor = dao.listar();
         cboFornecedor.removeAll();
-        
-        for(Fornecedor f : listarFornecedor){
+
+        for (Fornecedor f : listarFornecedor) {
             cboFornecedor.addItem(f);
         }
     }//GEN-LAST:event_cboFornecedorAncestorAdded
@@ -301,17 +322,20 @@ public class FrmProduto extends javax.swing.JFrame {
         obj.setDescricao(txtDescricao.getText());
         obj.setPreco(Double.parseDouble(txtPreco.getText()));
         obj.setQtdEstoque(Integer.parseInt(txtPreco.getText()));
-        
-        
+
         // Criando o objeto Fornecedor
         Fornecedor objFor = new Fornecedor();
-        objFor = (Fornecedor)cboFornecedor.getSelectedItem();
+        objFor = (Fornecedor) cboFornecedor.getSelectedItem();
         obj.setFornecedor(objFor);
-        
-        
+
         ProdutoDAO dao = new ProdutoDAO();
         dao.cadastrarProduto(obj);
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // Listando Produtos e InnerJoin Fornecedor
+        listar();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
