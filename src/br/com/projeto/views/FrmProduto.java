@@ -47,7 +47,7 @@ public class FrmProduto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        painelProduto = new javax.swing.JTabbedPane();
         jPanelCadastro = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
@@ -103,7 +103,7 @@ public class FrmProduto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        painelProduto.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanelCadastro.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -223,7 +223,7 @@ public class FrmProduto extends javax.swing.JFrame {
 
         jPanelCadastroLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAlterar, btnExcluir, btnNovo, btnSalvar});
 
-        jTabbedPane1.addTab("Cadastrar", jPanelCadastro);
+        painelProduto.addTab("Cadastrar", jPanelCadastro);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -235,6 +235,11 @@ public class FrmProduto extends javax.swing.JFrame {
                 "Código", "Descrição", "Preço", "Qtd. Estoque", "Fornecedor"
             }
         ));
+        tblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProdutos);
 
         jLabel16.setText("Nome:");
@@ -270,7 +275,7 @@ public class FrmProduto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Consultar", jPanel4);
+        painelProduto.addTab("Consultar", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -279,7 +284,7 @@ public class FrmProduto extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(painelProduto)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -287,7 +292,7 @@ public class FrmProduto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 60, Short.MAX_VALUE))
         );
 
@@ -333,10 +338,24 @@ public class FrmProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
+
         // Listando Produtos e InnerJoin Fornecedor
         listar();
     }//GEN-LAST:event_formWindowActivated
+
+    private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
+        // Setando dados da tabela para Painel 1
+        painelProduto.setSelectedIndex(0);
+        txtCodigo.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),0).toString());
+        txtDescricao.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),1).toString());
+        txtPreco.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),2).toString());
+        txtQtdEstoque.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),3).toString());
+        
+        Fornecedor f = new Fornecedor();
+        FornecedorDAO dao = new FornecedorDAO();
+        f = dao.consultaNome(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),4).toString());
+        cboFornecedor.getModel().setSelectedItem(f);
+    }//GEN-LAST:event_tblProdutosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -394,7 +413,7 @@ public class FrmProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelCadastro;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane painelProduto;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescricao;

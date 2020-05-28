@@ -41,7 +41,6 @@ public class ProdutoDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
     }
 
     public List<Produtos> listarProduto() {
@@ -72,6 +71,6 @@ public class ProdutoDAO {
             JOptionPane.showMessageDialog(null, e);
         }
         return null;
-    }
+    }    
 
 }
