@@ -6,7 +6,9 @@
 package br.com.projeto.views;
 
 import br.com.projeto.dao.FornecedorDAO;
+import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.model.Fornecedor;
+import br.com.projeto.model.Produtos;
 import java.util.List;
 
 /**
@@ -111,6 +113,11 @@ public class FrmProduto extends javax.swing.JFrame {
         btnNovo.setText("Novo");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
 
@@ -287,6 +294,24 @@ public class FrmProduto extends javax.swing.JFrame {
             cboFornecedor.addItem(f);
         }
     }//GEN-LAST:event_cboFornecedorAncestorAdded
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // Cadastrar Produto nesse evento
+        Produtos obj = new Produtos();
+        obj.setDescricao(txtDescricao.getText());
+        obj.setPreco(Double.parseDouble(txtPreco.getText()));
+        obj.setQtdEstoque(Integer.parseInt(txtPreco.getText()));
+        
+        
+        // Criando o objeto Fornecedor
+        Fornecedor objFor = new Fornecedor();
+        objFor = (Fornecedor)cboFornecedor.getSelectedItem();
+        obj.setFornecedor(objFor);
+        
+        
+        ProdutoDAO dao = new ProdutoDAO();
+        dao.cadastrarProduto(obj);
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
