@@ -321,7 +321,7 @@ public class FrmProduto extends javax.swing.JFrame {
         Produtos obj = new Produtos();
         obj.setDescricao(txtDescricao.getText());
         obj.setPreco(Double.parseDouble(txtPreco.getText()));
-        obj.setQtdEstoque(Integer.parseInt(txtPreco.getText()));
+        obj.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));
 
         // Criando o objeto Fornecedor
         Fornecedor objFor = new Fornecedor();
@@ -333,6 +333,7 @@ public class FrmProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
         // Listando Produtos e InnerJoin Fornecedor
         listar();
     }//GEN-LAST:event_formWindowActivated

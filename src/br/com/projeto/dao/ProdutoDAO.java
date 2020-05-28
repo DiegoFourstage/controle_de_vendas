@@ -43,32 +43,31 @@ public class ProdutoDAO {
         }
 
     }
-    
-    public List<Produtos> listarProduto(){
+
+    public List<Produtos> listarProduto() {
         try {
-            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p\n" +
-"inner join tb_fornecedor as f on (p.for_id = f.id);";
-            
+            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p inner join tb_fornecedor as f on (p.for_id = f.id);";
+
             List<Produtos> lista = new ArrayList<>();
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Produtos obj = new Produtos();
                 obj.setId(rs.getInt("p.id"));
-                obj.setDescricao("p.descricao");
+                obj.setDescricao(rs.getString("p.descricao"));
                 obj.setPreco(rs.getDouble("p.preco"));
                 obj.setQtdEstoque(rs.getInt("p.qtd_estoque"));
-                
+
                 Fornecedor f = new Fornecedor();
                 f.setNome(rs.getString("f.nome"));
                 obj.setFornecedor(f);
-                
+
                 lista.add(obj);
             }
-            
+
             return lista;
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
