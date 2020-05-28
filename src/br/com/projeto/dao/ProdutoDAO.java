@@ -72,5 +72,29 @@ public class ProdutoDAO {
         }
         return null;
     }    
+    
+    /*
+    Editar Produtos
+    */
+    
+    public void editarProdutos(Produtos obj){
+        try {
+            String sql = "update tb_produtos set descricao=?, preco=?, qtd_estoque=?, for_id=? where id=?";
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, obj.getDescricao());
+            pst.setDouble(2, obj.getPreco());
+            pst.setInt(3, obj.getQtdEstoque());
+            pst.setInt(4, obj.getFornecedor().getId());
+            pst.setInt(5, obj.getId());
+            
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Produto alterado com sucessso !");
+            pst.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
 
 }

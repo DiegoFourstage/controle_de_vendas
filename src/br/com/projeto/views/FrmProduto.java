@@ -141,6 +141,11 @@ public class FrmProduto extends javax.swing.JFrame {
         });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
 
@@ -314,10 +319,11 @@ public class FrmProduto extends javax.swing.JFrame {
     private void cboFornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cboFornecedorAncestorAdded
         FornecedorDAO dao = new FornecedorDAO();
         List<Fornecedor> listarFornecedor = dao.listar();
-        cboFornecedor.removeAll();
+        cboFornecedor.removeAllItems();
 
         for (Fornecedor f : listarFornecedor) {
             cboFornecedor.addItem(f);
+            
         }
     }//GEN-LAST:event_cboFornecedorAncestorAdded
 
@@ -355,7 +361,24 @@ public class FrmProduto extends javax.swing.JFrame {
         FornecedorDAO dao = new FornecedorDAO();
         f = dao.consultaNome(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),4).toString());
         cboFornecedor.getModel().setSelectedItem(f);
+        
     }//GEN-LAST:event_tblProdutosMouseClicked
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // Implementando método alterar
+        Produtos obj = new Produtos();
+        obj.setId(Integer.parseInt(txtCodigo.getText()));
+        obj.setDescricao(txtDescricao.getText());
+        obj.setPreco(Double.parseDouble(txtPreco.getText()));
+        obj.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));
+        
+        Fornecedor f = new Fornecedor();
+        f = (Fornecedor)cboFornecedor.getSelectedItem();
+        obj.setFornecedor(f);
+        
+        ProdutoDAO dao = new ProdutoDAO();
+        dao.editarProdutos(obj);
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
