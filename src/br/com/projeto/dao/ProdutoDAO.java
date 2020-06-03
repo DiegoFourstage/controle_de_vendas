@@ -71,13 +71,12 @@ public class ProdutoDAO {
             JOptionPane.showMessageDialog(null, e);
         }
         return null;
-    }    
-    
+    }
+
     /*
     Editar Produtos
-    */
-    
-    public void editarProdutos(Produtos obj){
+     */
+    public void editarProdutos(Produtos obj) {
         try {
             String sql = "update tb_produtos set descricao=?, preco=?, qtd_estoque=?, for_id=? where id=?";
             pst = conexao.prepareStatement(sql);
@@ -86,15 +85,36 @@ public class ProdutoDAO {
             pst.setInt(3, obj.getQtdEstoque());
             pst.setInt(4, obj.getFornecedor().getId());
             pst.setInt(5, obj.getId());
-            
+
             pst.execute();
             JOptionPane.showMessageDialog(null, "Produto alterado com sucessso !");
             pst.close();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
+    public void excluirProduto(Produtos obj) {
+        int deletar = JOptionPane.showConfirmDialog(null, "Deseja mesmo Excluir !", "Atenção", JOptionPane.YES_NO_OPTION);
+
+        if (deletar == JOptionPane.YES_NO_OPTION) {
+            try {
+                String sql = "delete from tb_produtos where id=?";
+                pst = conexao.prepareStatement(sql);
+                pst.setInt(1, obj.getId());
+
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Produto excluido com Sucesso !");
+                pst.close();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+                //System.out.println("Error sql : " + e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Produto ainda mantido !");
+        }
+    }
 
 }

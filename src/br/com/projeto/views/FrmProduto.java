@@ -10,6 +10,7 @@ import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.model.Fornecedor;
 import br.com.projeto.model.Produtos;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -148,6 +149,11 @@ public class FrmProduto extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCadastroLayout = new javax.swing.GroupLayout(jPanelCadastro);
         jPanelCadastro.setLayout(jPanelCadastroLayout);
@@ -323,7 +329,7 @@ public class FrmProduto extends javax.swing.JFrame {
 
         for (Fornecedor f : listarFornecedor) {
             cboFornecedor.addItem(f);
-            
+
         }
     }//GEN-LAST:event_cboFornecedorAncestorAdded
 
@@ -352,16 +358,16 @@ public class FrmProduto extends javax.swing.JFrame {
     private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
         // Setando dados da tabela para Painel 1
         painelProduto.setSelectedIndex(0);
-        txtCodigo.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),0).toString());
-        txtDescricao.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),1).toString());
-        txtPreco.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),2).toString());
-        txtQtdEstoque.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),3).toString());
-        
+        txtCodigo.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
+        txtDescricao.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 1).toString());
+        txtPreco.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 2).toString());
+        txtQtdEstoque.setText(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 3).toString());
+
         Fornecedor f = new Fornecedor();
         FornecedorDAO dao = new FornecedorDAO();
-        f = dao.consultaNome(tblProdutos.getValueAt(tblProdutos.getSelectedRow(),4).toString());
+        f = dao.consultaNome(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 4).toString());
         cboFornecedor.getModel().setSelectedItem(f);
-        
+
     }//GEN-LAST:event_tblProdutosMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -371,14 +377,30 @@ public class FrmProduto extends javax.swing.JFrame {
         obj.setDescricao(txtDescricao.getText());
         obj.setPreco(Double.parseDouble(txtPreco.getText()));
         obj.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));
-        
+
         Fornecedor f = new Fornecedor();
-        f = (Fornecedor)cboFornecedor.getSelectedItem();
+        f = (Fornecedor) cboFornecedor.getSelectedItem();
         obj.setFornecedor(f);
-        
+
         ProdutoDAO dao = new ProdutoDAO();
         dao.editarProdutos(obj);
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // Excluindo produto
+
+        try {
+            Produtos obj = new Produtos();
+            obj.setId(Integer.parseInt(txtCodigo.getText()));
+
+            ProdutoDAO dao = new ProdutoDAO();
+            dao.excluirProduto(obj);
+            
+        //Tratando o erro, se caso o Id não for setado, me exiba a mensagem orientando o cliente
+        } catch (java.lang.NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Campo id não foi setado !");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
