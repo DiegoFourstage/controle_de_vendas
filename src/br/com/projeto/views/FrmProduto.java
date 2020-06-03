@@ -255,6 +255,12 @@ public class FrmProduto extends javax.swing.JFrame {
 
         jLabel16.setText("Nome:");
 
+        txtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisarKeyReleased(evt);
+            }
+        });
+
         btnPesquisar.setText("Pesquisar");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -395,12 +401,33 @@ public class FrmProduto extends javax.swing.JFrame {
 
             ProdutoDAO dao = new ProdutoDAO();
             dao.excluirProduto(obj);
-            
-        //Tratando o erro, se caso o Id não for setado, me exiba a mensagem orientando o cliente
+
+            //Tratando o erro, se caso o Id não for setado, me exiba a mensagem orientando o cliente
         } catch (java.lang.NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Campo id não foi setado !");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void txtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarKeyReleased
+        // Pesquisando Produto na Lista do Painel 2, pelo seu caractere Inicial
+        String nome = "%" + txtPesquisar.getText() + "%";
+
+        DefaultTableModel dados = (DefaultTableModel) tblProdutos.getModel();
+        ProdutoDAO dao = new ProdutoDAO();
+        List<Produtos> lista = dao.pesquisaNome(nome);
+        dados.setNumRows(0);
+
+        for (Produtos f : lista) {
+            dados.addRow(new Object[]{
+                f.getId(),
+                f.getDescricao(),
+                f.getPreco(),
+                f.getQtdEstoque(),
+                f.getFornecedor().getId()
+            });
+        }
+
+    }//GEN-LAST:event_txtPesquisarKeyReleased
 
     /**
      * @param args the command line arguments

@@ -116,5 +116,37 @@ public class ProdutoDAO {
             JOptionPane.showMessageDialog(null, "Produto ainda mantido !");
         }
     }
+    
+    public List <Produtos> pesquisaNome(String nome) {
+        try {
+            String sql = "select  * from tb_produtos where descricao like ?";
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome);
+            rs = pst.executeQuery();
+            
+            List<Produtos> list = new ArrayList<>();
+            
+            while(rs.next()){
+                Produtos obj = new Produtos();
+                obj.setId(rs.getInt("id"));
+                obj.setDescricao(rs.getString("descricao"));
+                obj.setPreco(rs.getDouble("preco"));
+                obj.setQtdEstoque(rs.getInt("qtd_estoque"));
+                                
+                
+                Fornecedor f = new Fornecedor();
+                f.setId(rs.getInt("id"));
+                obj.setFornecedor(f);
+                
+                list.add(obj);                
+            }
+            
+            return list;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
 
 }
