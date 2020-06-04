@@ -116,32 +116,65 @@ public class ProdutoDAO {
             JOptionPane.showMessageDialog(null, "Produto ainda mantido !");
         }
     }
-    
-    public List <Produtos> pesquisaNome(String nome) {
+
+    public List<Produtos> pesquisaNome(String nome) {
         try {
-            String sql = "select  * from tb_produtos where descricao like ?";
+            //Correção de Sql, aonde Fornecedor se relaciona com Produtos Inner join
+            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p inner join tb_fornecedor as f on (p.for_id = f.id) where p.descricao like ?";
             pst = conexao.prepareStatement(sql);
             pst.setString(1, nome);
             rs = pst.executeQuery();
-            
+
             List<Produtos> list = new ArrayList<>();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Produtos obj = new Produtos();
                 obj.setId(rs.getInt("id"));
                 obj.setDescricao(rs.getString("descricao"));
                 obj.setPreco(rs.getDouble("preco"));
                 obj.setQtdEstoque(rs.getInt("qtd_estoque"));
-                                
+                
+                // Setando dados de Fornecedor e adicionando a lista
+                Fornecedor f = new Fornecedor();
+                //f.setId(rs.getInt("for_id"));
+                f.setNome(rs.getString("f.nome"));
+                obj.setFornecedor(f);
+
+                list.add(obj);
+            }
+
+            return list;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+
+    /*
+    Pesquisando o Produto pela descrição e setando o obj nos campos de texto Vazios
+     */
+    public Produtos consulta(String descricao) {
+        try {
+            String sql = "select * from tb_produtos where descricao=?";
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, descricao);
+            rs = pst.executeQuery();
+
+            Produtos obj = new Produtos();
+
+            if (rs.next()) {
+                
+                obj.setId(rs.getInt("id"));
+                obj.setDescricao(rs.getString("descricao"));
+                obj.setPreco(rs.getDouble("preco"));
+                obj.setQtdEstoque(rs.getInt("qtd_estoque"));
                 
                 Fornecedor f = new Fornecedor();
-                f.setId(rs.getInt("id"));
-                obj.setFornecedor(f);
-                
-                list.add(obj);                
+                f.setNome(rs.getString("nome"));
+
             }
-            
-            return list;
+            return obj;
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

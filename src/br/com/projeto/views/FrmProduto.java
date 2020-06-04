@@ -423,7 +423,7 @@ public class FrmProduto extends javax.swing.JFrame {
                 f.getDescricao(),
                 f.getPreco(),
                 f.getQtdEstoque(),
-                f.getFornecedor().getId()
+                f.getFornecedor().getNome()
             });
         }
 
