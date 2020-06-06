@@ -10,6 +10,8 @@ import br.com.projeto.model.Clientes;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -174,6 +176,12 @@ public class FrmVenda extends javax.swing.JFrame {
         jLabel9.setText("Cpf:");
 
         jLabel6.setText("Nome:");
+
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNomeKeyReleased(evt);
+            }
+        });
 
         jLabel7.setText("Data:");
 
@@ -374,6 +382,24 @@ public class FrmVenda extends javax.swing.JFrame {
             txtNome.setText(obj.getNome());
         }
     }//GEN-LAST:event_txtCpfKeyPressed
+
+    // Exbindo cpf ao buscar por Nome em caracteres
+    private void txtNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyReleased
+        // 
+        String nome = "%" + txtNome.getText() + "%";
+
+        VendasDAO dao = new VendasDAO();
+        Clientes obj = new Clientes();
+        List<Clientes> lista = dao.buscarNome(nome);
+
+        for (Clientes o : lista) {
+            txtCpf.setText(o.getCpf());
+            if (txtNome.getText().isEmpty()) {
+                txtCpf.setText(null);
+                //Implementar equals de cpf
+            }
+        }
+    }//GEN-LAST:event_txtNomeKeyReleased
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,8 @@ import br.com.projeto.model.Clientes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,9 +34,8 @@ public class VendasDAO {
             Clientes obj = new Clientes();
 
             if (rs.next()) {
-                
+
                 obj.setNome(rs.getString("nome"));
-                
 
             } else {
                 JOptionPane.showMessageDialog(null, "Cpf não econtrado !");
@@ -43,8 +44,32 @@ public class VendasDAO {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            return null;        
+            return null;
         }
-        
+
+    }
+
+    //Busca nome por uma lista
+    public List<Clientes> buscarNome(String nome) {
+        try {
+            String sql = "select * from tb_clientes where nome like ?";
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome);
+            rs = pst.executeQuery();
+
+            List<Clientes> lista = new ArrayList<>();
+
+            while (rs.next()) {
+                Clientes obj = new Clientes();
+                obj.setCpf(rs.getString("cpf"));
+
+                lista.add(obj);
+            }
+            return lista;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
     }
 }
