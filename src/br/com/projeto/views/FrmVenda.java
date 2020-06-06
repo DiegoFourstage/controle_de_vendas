@@ -5,6 +5,11 @@
  */
 package br.com.projeto.views;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+
 
 /**
  *
@@ -57,6 +62,11 @@ public class FrmVenda extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de Vendas");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(114, 177, 240));
 
@@ -163,6 +173,8 @@ public class FrmVenda extends javax.swing.JFrame {
         jLabel6.setText("Nome:");
 
         jLabel7.setText("Data:");
+
+        txtData.setEditable(false);
 
         btnPesquisarNome.setText("Pesquisar");
 
@@ -325,6 +337,15 @@ public class FrmVenda extends javax.swing.JFrame {
     private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecoActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // Captura a data atual do Sistema
+        Date atual = new Date();
+        SimpleDateFormat dataBr = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = dataBr.format(atual);
+        
+        txtData.setText(dataFormatada);
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
