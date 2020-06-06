@@ -129,8 +129,18 @@ public class FrmProduto extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        cboFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboFornecedorMouseClicked(evt);
+            }
+        });
 
         btnConsulta.setText("Pesquisar");
+        btnConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaActionPerformed(evt);
+            }
+        });
 
         btnNovo.setText("Novo");
 
@@ -331,7 +341,7 @@ public class FrmProduto extends javax.swing.JFrame {
     private void cboFornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cboFornecedorAncestorAdded
         FornecedorDAO dao = new FornecedorDAO();
         List<Fornecedor> listarFornecedor = dao.listar();
-        cboFornecedor.removeAllItems();
+        //cboFornecedor.removeAllItems();
 
         for (Fornecedor f : listarFornecedor) {
             cboFornecedor.addItem(f);
@@ -428,6 +438,45 @@ public class FrmProduto extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txtPesquisarKeyReleased
+
+    private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
+        // Ao digitar a Descrição do Produto me faça uma busca. Obs: Deve ser idêntico para poder fazer a pesquisa
+        String descricao = txtDescricao.getText();
+        Produtos obj = new Produtos();
+
+        ProdutoDAO dao = new ProdutoDAO();
+
+        obj = dao.consultaNome(descricao);
+        cboFornecedor.removeAllItems();
+
+        if (obj.getDescricao() != null) {
+            txtCodigo.setText(String.valueOf(obj.getId()));
+            txtDescricao.setText(obj.getDescricao());
+            txtPreco.setText(String.valueOf(obj.getPreco()));
+            txtQtdEstoque.setText(String.valueOf(obj.getQtdEstoque()));
+
+            Fornecedor f = new Fornecedor();
+            FornecedorDAO fdao = new FornecedorDAO();
+
+            f = fdao.consultaNome(obj.getFornecedor().getNome());
+            cboFornecedor.getModel().setSelectedItem(f);
+        } else {
+            JOptionPane.showMessageDialog(null, "Produto não encontrado !");
+        }
+
+    }//GEN-LAST:event_btnConsultaActionPerformed
+
+    private void cboFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboFornecedorMouseClicked
+        // Ao clicar atualizar meu comboBox
+        FornecedorDAO dao = new FornecedorDAO();
+        List<Fornecedor> listarFornecedor = dao.listar();
+        cboFornecedor.removeAllItems();
+
+        for (Fornecedor f : listarFornecedor) {
+            cboFornecedor.addItem(f);
+        }
+
+    }//GEN-LAST:event_cboFornecedorMouseClicked
 
     /**
      * @param args the command line arguments

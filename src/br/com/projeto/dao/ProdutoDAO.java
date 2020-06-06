@@ -133,7 +133,7 @@ public class ProdutoDAO {
                 obj.setDescricao(rs.getString("descricao"));
                 obj.setPreco(rs.getDouble("preco"));
                 obj.setQtdEstoque(rs.getInt("qtd_estoque"));
-                
+
                 // Setando dados de Fornecedor e adicionando a lista
                 Fornecedor f = new Fornecedor();
                 //f.setId(rs.getInt("for_id"));
@@ -154,9 +154,9 @@ public class ProdutoDAO {
     /*
     Pesquisando o Produto pela descrição e setando o obj nos campos de texto Vazios
      */
-    public Produtos consulta(String descricao) {
+    public Produtos consultaNome(String descricao) {
         try {
-            String sql = "select * from tb_produtos where descricao=?";
+            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p inner join tb_fornecedor as f on (p.for_id = f.id) where p.descricao = ?";
             pst = conexao.prepareStatement(sql);
             pst.setString(1, descricao);
             rs = pst.executeQuery();
@@ -164,14 +164,15 @@ public class ProdutoDAO {
             Produtos obj = new Produtos();
 
             if (rs.next()) {
-                
+
                 obj.setId(rs.getInt("id"));
                 obj.setDescricao(rs.getString("descricao"));
                 obj.setPreco(rs.getDouble("preco"));
                 obj.setQtdEstoque(rs.getInt("qtd_estoque"));
-                
+
                 Fornecedor f = new Fornecedor();
-                f.setNome(rs.getString("nome"));
+                f.setNome(rs.getString("f.nome"));
+                obj.setFornecedor(f);
 
             }
             return obj;
