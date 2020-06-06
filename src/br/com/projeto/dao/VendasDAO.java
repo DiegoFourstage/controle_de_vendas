@@ -2,6 +2,7 @@ package br.com.projeto.dao;
 
 import br.com.projeto.jdbc.ConnectionFactory;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.Produtos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,6 +67,30 @@ public class VendasDAO {
                 lista.add(obj);
             }
             return lista;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+
+    //Buscar produto por Cod e exibir seus dados nos campos de textos
+    public Produtos buscaProduto(int cod) {
+        try {
+            String sql = "select * from tb_produtos where id = ?";
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, cod);
+            rs = pst.executeQuery();
+
+            Produtos obj = new Produtos();
+            if (rs.next()) {
+                obj.setDescricao(rs.getString("descricao"));
+                obj.setPreco(rs.getDouble("preco"));
+                obj.setQtdEstoque(rs.getInt("qtd_estoque"));
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não encontrado !");
+            }
+            return obj;
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
