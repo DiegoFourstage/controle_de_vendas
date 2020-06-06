@@ -5,19 +5,17 @@
  */
 package br.com.projeto.views;
 
+import br.com.projeto.dao.VendasDAO;
+import br.com.projeto.model.Clientes;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
-
 
 /**
  *
  * @author D1350
  */
 public class FrmVenda extends javax.swing.JFrame {
-
-    
 
     public FrmVenda() {
         initComponents();
@@ -167,6 +165,11 @@ public class FrmVenda extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCpfKeyPressed(evt);
+            }
+        });
 
         jLabel9.setText("Cpf:");
 
@@ -177,6 +180,11 @@ public class FrmVenda extends javax.swing.JFrame {
         txtData.setEditable(false);
 
         btnPesquisarNome.setText("Pesquisar");
+        btnPesquisarNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarNomeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -343,9 +351,29 @@ public class FrmVenda extends javax.swing.JFrame {
         Date atual = new Date();
         SimpleDateFormat dataBr = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = dataBr.format(atual);
-        
+
         txtData.setText(dataFormatada);
     }//GEN-LAST:event_formWindowActivated
+
+    private void btnPesquisarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarNomeActionPerformed
+        // Buscar cpf e exibir o nome
+        Clientes obj = new Clientes();
+        VendasDAO dao = new VendasDAO();
+        obj = dao.buscaPorCpf(txtCpf.getText());
+        txtNome.setText(obj.getNome());
+    }//GEN-LAST:event_btnPesquisarNomeActionPerformed
+
+    private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
+        // Buscar cpf e exibir o nome
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            Clientes obj = new Clientes();
+            VendasDAO dao = new VendasDAO();
+
+            obj = dao.buscaPorCpf(txtCpf.getText());
+            txtNome.setText(obj.getNome());
+        }
+    }//GEN-LAST:event_txtCpfKeyPressed
 
     /**
      * @param args the command line arguments
