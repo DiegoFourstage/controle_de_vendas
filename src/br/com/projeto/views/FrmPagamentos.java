@@ -16,6 +16,12 @@ public class FrmPagamentos extends javax.swing.JFrame {
      */
     public FrmPagamentos() {
         initComponents();
+        txtDinheiro.setText("0");
+        txtCartao.setText("0");
+        txtCheque.setText("0");
+        txtTroco.setText("0");
+        txtTotal.setText("0");
+
     }
 
     /**
@@ -34,11 +40,11 @@ public class FrmPagamentos extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtCartao = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtBairro2 = new javax.swing.JTextField();
+        txtCheque = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtTroco = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txTotal = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
         btnFinalizarCompra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,9 +84,14 @@ public class FrmPagamentos extends javax.swing.JFrame {
 
         jLabel10.setText("Total:");
 
-        txTotal.setEditable(false);
+        txtTotal.setEditable(false);
 
         btnFinalizarCompra.setText("Finalizar Venda");
+        btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,10 +114,10 @@ public class FrmPagamentos extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtBairro2)
+                            .addComponent(txtCheque)
                             .addComponent(txtCartao)
                             .addComponent(txtTroco)
-                            .addComponent(txTotal)
+                            .addComponent(txtTotal)
                             .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -124,7 +135,7 @@ public class FrmPagamentos extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBairro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -133,14 +144,38 @@ public class FrmPagamentos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnFinalizarCompra)
                 .addGap(0, 74, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
+        // Finalizar a compra
+        // Declarando variáveis
+        double dinheiro, cartao, cheque, troco, total, venda;
+
+        // Passando tipos de paragamentos para as variáveis
+        dinheiro = Double.parseDouble(txtDinheiro.getText());
+        cartao = Double.parseDouble(txtCartao.getText());
+        cheque = Double.parseDouble(txtCheque.getText());
+
+        // Total da venda
+        venda = Double.parseDouble(txtTotal.getText());
+
+        // Total
+        total = dinheiro + cartao + cheque;
+
+        // Calcular o total em diverso tipo de pagamentos
+        troco = total - venda;
+
+        // Calculando o troco
+        txtTroco.setText(String.valueOf(troco));
+    }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,7 +188,7 @@ public class FrmPagamentos extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -186,10 +221,10 @@ public class FrmPagamentos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txTotal;
-    private javax.swing.JTextField txtBairro2;
     private javax.swing.JTextField txtCartao;
+    private javax.swing.JTextField txtCheque;
     private javax.swing.JTextField txtDinheiro;
+    public javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTroco;
     // End of variables declaration//GEN-END:variables
 }

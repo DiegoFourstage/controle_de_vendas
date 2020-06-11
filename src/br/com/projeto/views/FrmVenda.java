@@ -47,7 +47,7 @@ public class FrmVenda extends javax.swing.JFrame {
         txtQtd = new javax.swing.JTextField();
         txtProduto = new javax.swing.JTextField();
         btnPesquisaProd = new javax.swing.JButton();
-        btnPagamento1 = new javax.swing.JButton();
+        btnAddCarrinho = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         txtCpf = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -134,10 +134,10 @@ public class FrmVenda extends javax.swing.JFrame {
             }
         });
 
-        btnPagamento1.setText("Adicionar ao Carrinho");
-        btnPagamento1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddCarrinho.setText("Adicionar ao Carrinho");
+        btnAddCarrinho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPagamento1ActionPerformed(evt);
+                btnAddCarrinhoActionPerformed(evt);
             }
         });
 
@@ -167,7 +167,7 @@ public class FrmVenda extends javax.swing.JFrame {
                                         .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
-                                        .addComponent(btnPagamento1)))))
+                                        .addComponent(btnAddCarrinho)))))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(btnPesquisaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,7 +199,7 @@ public class FrmVenda extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPagamento1)
+                .addComponent(btnAddCarrinho)
                 .addGap(41, 41, 41))
         );
 
@@ -318,6 +318,11 @@ public class FrmVenda extends javax.swing.JFrame {
         jLabel11.setText("TOTAL DA VENDA:");
 
         btnPagamento.setText("PAGAMENTO");
+        btnPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagamentoActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("CANCELAR");
 
@@ -476,7 +481,7 @@ public class FrmVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCodigoKeyPressed
 
-    private void btnPagamento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamento1ActionPerformed
+    private void btnAddCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCarrinhoActionPerformed
         // Adicionar Produtos ao Carrinho
         if (txtQtd.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha o campo quantidade !");
@@ -500,7 +505,7 @@ public class FrmVenda extends javax.swing.JFrame {
             });
             txtQtd.setText(null);
         }
-    }//GEN-LAST:event_btnPagamento1ActionPerformed
+    }//GEN-LAST:event_btnAddCarrinhoActionPerformed
 
     private void txtQtdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtdKeyPressed
         // Adicionar carrinho ao teclar o enter
@@ -530,6 +535,14 @@ public class FrmVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha o campo quantidade !");
         }
     }//GEN-LAST:event_txtQtdKeyPressed
+
+    private void btnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamentoActionPerformed
+        // Pagamento
+        FrmPagamentos pag = new FrmPagamentos();
+        pag.txtTotal.setText(String.valueOf(total));
+        pag.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPagamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -570,9 +583,9 @@ public class FrmVenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddCarrinho;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPagamento;
-    private javax.swing.JButton btnPagamento1;
     private javax.swing.JButton btnPesquisaProd;
     private javax.swing.JButton btnPesquisarNome;
     private javax.swing.JButton jButton3;
