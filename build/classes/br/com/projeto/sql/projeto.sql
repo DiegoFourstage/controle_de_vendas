@@ -114,6 +114,9 @@ total_venda decimal (10,2),
 observacao varchar(100)
 );
 
+-- Retorna o valor maximo das vendas
+select max(id) id from tb_vendas;
+
 describe tb_vendas;
 select * from tb_vendas;
 
