@@ -105,4 +105,28 @@ select * from tb_produtos;
 select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p
 inner join tb_fornecedor as f on (p.for_id = f.id);
 
+-- -------------------------------Relacionado a Venda ------------------------------
+create table tb_vendas(
+id int primary key auto_increment,
+cliente_id int,
+data_venda datetime,
+total_venda decimal (10,2),
+observacao varchar(100)
+);
+
+describe tb_vendas;
+select * from tb_vendas;
+
+-- -------------------------------Relacionado a Item das Vendas --------------------
+create table tb_itensvendas(
+id int primary key auto_increment,
+venda_id int,
+produto_id int,
+qtd int,
+subtotal decimal(10,2)
+);
+
+describe tb_itensvendas;
+select * from tb_itensvendas;
+
 use projeto;	
