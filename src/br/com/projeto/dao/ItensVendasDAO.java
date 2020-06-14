@@ -23,8 +23,8 @@ public class ItensVendasDAO {
     // Método cadastrar os itens
     public void cadastrarItensVendas(ItemVendas obj) {
         try {
-            // Caminho sql para inserção de dados
-            String sql = "insert into tb_itensvendas (venda_id, produto_id, qtd, subtotal) values (?,?,?,?,)";
+            // Caminho sql para inserção de dados       
+            String sql = "insert into tb_itensvendas (venda_id, produto_id, qtd, subtotal) values (?,?,?,?)";
             // Preparando as conexões
             pst = conexao.prepareStatement(sql);
             // Passando dados para o objetos
@@ -35,10 +35,11 @@ public class ItensVendasDAO {
 
             //Atulizando os dados que vai ser inserido 
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Itens do carrinho adicionado ao banco de dados !");
+
             pst.close();
 
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }
 

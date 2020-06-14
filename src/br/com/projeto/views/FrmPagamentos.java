@@ -1,10 +1,14 @@
 package br.com.projeto.views;
 
+import br.com.projeto.dao.ItensVendasDAO;
 import br.com.projeto.dao.VendasDAO;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.ItemVendas;
+import br.com.projeto.model.Produtos;
 import br.com.projeto.model.Vendas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -216,10 +220,28 @@ public class FrmPagamentos extends javax.swing.JFrame {
 
         //Retornar o id da ultima venda
         vendas.setId(dao.retornaUltimaVenda());
-        
+
         // Exibindo a ultima venda no console
         //System.out.println("Id da Ultima venda " + vendas.getId());
-        
+        // Cadastrando os produtos na tabela itensVendas
+        //Método getRowCount retorna o número de linhas, for irá percorrer essas linhas
+        for (int i = 0; i < carrinho.getRowCount(); i++) {
+            // Instanciando os objetos            
+            ItemVendas itensVendas = new ItemVendas();
+            Produtos prod = new Produtos();
+
+            // Pegando o id do obj vendas
+            itensVendas.setVenda(vendas);
+            // Pegando o cód do produtos
+            prod.setId(Integer.parseInt(carrinho.getValueAt(i, 0).toString())); // i representa a linha, o nº0 representa á coluna
+            itensVendas.setProduto(prod); //setando o id do produto
+            itensVendas.setQtd(Integer.parseInt(carrinho.getValueAt(i, 2).toString())); // Quantidade
+            itensVendas.setSubtotal(Double.parseDouble(carrinho.getValueAt(i, 4).toString())); //Subtotal
+
+            ItensVendasDAO daoItem = new ItensVendasDAO();
+            daoItem.cadastrarItensVendas(itensVendas);
+        }
+        JOptionPane.showMessageDialog(null, "Venda registrada com sucesso !");
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
     /**
