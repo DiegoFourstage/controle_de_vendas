@@ -9,7 +9,7 @@ public class Vendas {
     //Atributos
     private int id;
     private Clientes cliente;
-    private String data_time;
+    private String data_venda; // Corrigindo nome
     private double total_venda;
     private String obs;    
     
@@ -31,12 +31,13 @@ public class Vendas {
         this.cliente = cliente;
     }
 
-    public String getData_time() {
-        return data_time;
+    public String getData_venda() {
+        return data_venda;
     }
-
-    public void setData_time(String data_time) {
-        this.data_time = data_time;
+    
+    // Corrigindo os getters e setters de Data
+    public void setData_venda(String data_time) {
+        this.data_venda = data_time;
     }
 
     public double getTotal_venda() {

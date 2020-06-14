@@ -101,8 +101,9 @@ public class VendasDAO {
 
     // Cadastrar a venda
     public void cadastrarVendas(Vendas obj) {
+            // Corrigindo aonde não foi inserido o nome da dataBase
         try {
-            String sql = "insert into (cliente_id, data_venda, total_venda, observacao) values (?,?,?,?)";
+            String sql = "insert into tb_vendas (cliente_id, data_venda, total_venda, observacao) values (?,?,?,?)";
             pst = conexao.prepareStatement(sql);
 
             pst.setInt(1, obj.getCliente().getId());
