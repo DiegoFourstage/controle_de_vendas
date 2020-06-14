@@ -21,7 +21,7 @@ estado varchar(2)
 );
 
 describe tb_clientes; -- Descrevendo os campos select * from tb_clientes; -- Exibindo os clientes cadastrados
-
+select * from tb_clientes;
 -- -----------------------DADOS SQL-----------------------------------------------------------
 	-- Inserir cliente sql
 insert into tb_clientes (nome, rg, cpf, email, telefone, celular, cep, endereco, 
@@ -104,5 +104,32 @@ select * from tb_produtos;
 
 select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p
 inner join tb_fornecedor as f on (p.for_id = f.id);
+
+-- -------------------------------Relacionado a Venda ------------------------------
+create table tb_vendas(
+id int primary key,
+cliente_id int,
+data_venda datetime,
+total_venda decimal (10,2),
+observacao varchar(100)
+);
+
+-- Retorna o valor maximo das vendas
+select max(id) id from tb_vendas;
+
+describe tb_vendas;
+select * from tb_vendas;
+
+-- -------------------------------Relacionado a Item das Vendas --------------------
+create table tb_itensvendas(
+id int primary key auto_increment,
+venda_id int,
+produto_id int,
+qtd int,
+subtotal decimal(10,2)
+);
+
+describe tb_itensvendas;
+select * from tb_itensvendas;
 
 use projeto;	

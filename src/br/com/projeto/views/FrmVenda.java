@@ -21,6 +21,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmVenda extends javax.swing.JFrame {
 
+    // Instanciado publico, para cliente instanciado em pagamentos receber seus dados
+    Clientes obj = new Clientes();
+
     public FrmVenda() {
         initComponents();
     }
@@ -419,7 +422,7 @@ public class FrmVenda extends javax.swing.JFrame {
 
     private void btnPesquisarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarNomeActionPerformed
         // Buscar cpf e exibir o nome
-        Clientes obj = new Clientes();
+        //Clientes obj = new Clientes();
         VendasDAO dao = new VendasDAO();
         obj = dao.buscaPorCpf(txtCpf.getText());
         txtNome.setText(obj.getNome());
@@ -428,10 +431,9 @@ public class FrmVenda extends javax.swing.JFrame {
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
         // Buscar cpf e exibir o nome
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
-            Clientes obj = new Clientes();
+            
+            // Clientes foi instanciado na area public, para ser usada na classe Pagamentos
             VendasDAO dao = new VendasDAO();
-
             obj = dao.buscaPorCpf(txtCpf.getText());
             txtNome.setText(obj.getNome());
         }
@@ -517,7 +519,7 @@ public class FrmVenda extends javax.swing.JFrame {
                 preco = Double.parseDouble(txtPreco.getText());
                 subTotal = qtd * preco;
                 total += subTotal;
-                
+
                 txtTotal.setText(String.valueOf(total));
 
                 carrinho = (DefaultTableModel) tblCarrinho.getModel();
@@ -530,7 +532,7 @@ public class FrmVenda extends javax.swing.JFrame {
                 });
                 txtQtd.setText(null);
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Preencha o campo quantidade !");
         }
@@ -541,6 +543,9 @@ public class FrmVenda extends javax.swing.JFrame {
         FrmPagamentos pag = new FrmPagamentos();
         pag.txtTotal.setText(String.valueOf(total));
         pag.setVisible(true);
+        
+        // Ao chamar a tela pagamento, cliente instanciado ele receberar os dados do nosso obj(id...)
+        pag.cliente = obj;
         this.dispose();
     }//GEN-LAST:event_btnPagamentoActionPerformed
 
