@@ -546,6 +546,9 @@ public class FrmVenda extends javax.swing.JFrame {
         
         // Ao chamar a tela pagamento, cliente instanciado ele receberar os dados do nosso obj(id...)
         pag.cliente = obj;
+        // Ao acionar pagamento nosso carrinho ele será igual ao carrinho da classe frmPagamentos
+        pag.carrinho = carrinho;
+        
         this.dispose();
     }//GEN-LAST:event_btnPagamentoActionPerformed
 

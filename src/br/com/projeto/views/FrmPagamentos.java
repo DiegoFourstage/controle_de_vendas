@@ -5,6 +5,7 @@ import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Vendas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,6 +15,8 @@ public class FrmPagamentos extends javax.swing.JFrame {
 
     // Cliente passa a receber o obj da classe FrmVenda(id)
     Clientes cliente = new Clientes();
+    // Aqui nosso carrinho recebeu os itens do carrinho de vendas
+    DefaultTableModel carrinho;
 
     public FrmPagamentos() {
         initComponents();
@@ -210,13 +213,20 @@ public class FrmPagamentos extends javax.swing.JFrame {
         // Adicionando obj vendas ao método cadastrar
         VendasDAO dao = new VendasDAO();
         dao.cadastrarVendas(vendas);
+
+        //Retornar o id da ultima venda
+        vendas.setId(dao.retornaUltimaVenda());
+        
+        // Exibindo a ultima venda no console
+        //System.out.println("Id da Ultima venda " + vendas.getId());
+        
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
