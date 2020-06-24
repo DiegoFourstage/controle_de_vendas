@@ -195,6 +195,8 @@ public class ProdutoDAO {
             pst.close();
            
         } catch (Exception e) {
+            //Mensagem caso ocorra um erro
+            JOptionPane.showMessageDialog(null, e);
         }
     }
     
@@ -206,13 +208,15 @@ public class ProdutoDAO {
             
             String sql = "select qtd_estoque from tb_produtos where id=?";
             pst = conexao.prepareStatement(sql);
+            pst.setInt(1, id);
+            // Execute query tem que estar abaixo do pst.setInt(1, id);
             rs = pst.executeQuery();
             
             if(rs.next()){
                 
                 qtd_estoque = (rs.getInt("qtd_estoque"));
             }
-            return qtd_estoque;
+            return qtd_estoque;            
             
         } catch (SQLException  e) {
             throw new RuntimeException(e);            
