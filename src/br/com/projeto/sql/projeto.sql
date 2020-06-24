@@ -101,6 +101,8 @@ select * from tb_produtos;
 
 -- Para poder fazer interação de dados de fornecedor em produtos 
 -- precisamos fazer o inner join
+-- Caminho para atualizar dados do estoque 
+-- String sql = "update tb_produtos set qtd_estoque = ?  where id=?";
 
 select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p
 inner join tb_fornecedor as f on (p.for_id = f.id);
