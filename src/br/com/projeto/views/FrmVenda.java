@@ -5,6 +5,7 @@
  */
 package br.com.projeto.views;
 
+import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.dao.VendasDAO;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Produtos;
@@ -225,8 +226,8 @@ public class FrmVenda extends javax.swing.JFrame {
         jLabel6.setText("Nome:");
 
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNomeKeyReleased(evt);
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
             }
         });
 
@@ -422,40 +423,22 @@ public class FrmVenda extends javax.swing.JFrame {
 
     private void btnPesquisarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarNomeActionPerformed
         // Buscar cpf e exibir o nome
-        //Clientes obj = new Clientes();
-        VendasDAO dao = new VendasDAO();
-        obj = dao.buscaPorCpf(txtCpf.getText());
+        //Clientes obj = new Clientes(); Comentado para que cliente na área public passe os dados para o pagamento
+        ClientesDAO dao = new ClientesDAO();
+        obj = dao.buscaCpf(txtCpf.getText());
         txtNome.setText(obj.getNome());
     }//GEN-LAST:event_btnPesquisarNomeActionPerformed
 
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
         // Buscar cpf e exibir o nome
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            
+
             // Clientes foi instanciado na area public, para ser usada na classe Pagamentos
-            VendasDAO dao = new VendasDAO();
-            obj = dao.buscaPorCpf(txtCpf.getText());
+            ClientesDAO dao = new ClientesDAO();
+            obj = dao.buscaCpf(txtCpf.getText());
             txtNome.setText(obj.getNome());
         }
     }//GEN-LAST:event_txtCpfKeyPressed
-
-    // Exbindo cpf ao buscar por Nome em caracteres
-    private void txtNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyReleased
-        // 
-        String nome = txtNome.getText() + "%";
-
-        VendasDAO dao = new VendasDAO();
-        Clientes obj = new Clientes();
-        List<Clientes> lista = dao.buscarNome(nome);
-
-        for (Clientes o : lista) {
-            txtCpf.setText(o.getCpf());
-            if (txtNome.getText().isEmpty()) {
-                txtCpf.setText(null);
-                //Implementar equals de cpf
-            }
-        }
-    }//GEN-LAST:event_txtNomeKeyReleased
 
     private void btnPesquisaProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaProdActionPerformed
         // Busca por Produto
@@ -543,14 +526,26 @@ public class FrmVenda extends javax.swing.JFrame {
         FrmPagamentos pag = new FrmPagamentos();
         pag.txtTotal.setText(String.valueOf(total));
         pag.setVisible(true);
-        
+
         // Ao chamar a tela pagamento, cliente instanciado ele receberar os dados do nosso obj(id...)
         pag.cliente = obj;
         // Ao acionar pagamento nosso carrinho ele será igual ao carrinho da classe frmPagamentos
         pag.carrinho = carrinho;
-        
+
         this.dispose();
     }//GEN-LAST:event_btnPagamentoActionPerformed
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        // Busca por nome do cliente
+        ClientesDAO dao = new ClientesDAO();
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            // Obs: obj Cliente está instanciado acima na área public, pagamentos recebe também à instanciação 
+            // para poder setar o id do cliente em histórico de vendas por período
+            String nome = txtNome.getText();
+            obj = dao.buscaNome(nome);
+            txtCpf.setText(obj.getCpf());  // Ao busca ser encontrada, campo nome será exibido        
+        }
+    }//GEN-LAST:event_txtNomeKeyPressed
 
     /**
      * @param args the command line arguments

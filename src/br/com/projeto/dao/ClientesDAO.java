@@ -218,5 +218,49 @@ public class ClientesDAO {
             return null;
         }
     }
+    
+    //Busca por cpf de cliente 
+    public Clientes buscaCpf(String cpf){
+        try {
+            String sql = "select * from tb_clientes where cpf = ?";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, cpf);
+            ResultSet rs = pst.executeQuery();
+            
+            Clientes obj = new Clientes();
+            if(rs.next()){
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCpf(rs.getString("cpf"));
+            }
+            return obj;
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+    
+    //Busca por nome de cliente
+    public Clientes buscaNome(String nome){
+        try {
+            String sql = "select * from tb_clientes where nome = ?";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome);
+            ResultSet rs = pst.executeQuery();
+            
+            Clientes obj = new Clientes();
+            if(rs.next()){
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCpf(rs.getString("cpf"));
+            }
+            return obj;
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
 
 }

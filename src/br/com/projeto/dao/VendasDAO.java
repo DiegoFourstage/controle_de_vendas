@@ -7,6 +7,8 @@ import br.com.projeto.model.Vendas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -36,8 +38,20 @@ public class VendasDAO {
             Clientes obj = new Clientes();
 
             if (rs.next()) {
-
+                obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("estado"));
 
             } else {
                 JOptionPane.showMessageDialog(null, "Cpf não econtrado !");
@@ -101,7 +115,7 @@ public class VendasDAO {
 
     // Cadastrar a venda
     public void cadastrarVendas(Vendas obj) {
-            // Corrigindo aonde não foi inserido o nome da dataBase
+        // Corrigindo aonde não foi inserido o nome da dataBase
         try {
             String sql = "insert into tb_vendas (cliente_id, data_venda, total_venda, observacao) values (?,?,?,?)";
             pst = conexao.prepareStatement(sql);
@@ -112,7 +126,7 @@ public class VendasDAO {
             pst.setString(4, obj.getObs());
 
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Venda registrada com sucesso !");
+
             pst.close();
 
         } catch (Exception e) {
@@ -128,16 +142,52 @@ public class VendasDAO {
             String sql = "select max(id) id from tb_vendas";
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 Vendas v = new Vendas();
                 v.setId(rs.getInt("id"));
-                
+
                 idVenda = v.getId();
             }
             return idVenda;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    //Listar histórico de vendas por um período de data
+    public List <Vendas> consultaPeridoDataVendas(LocalDate dataInicial, LocalDate dataFinal){
+        try {
+            String sql = "select v.id, v.data_venda, c.nome, v.total_venda, v.observacao from tb_vendas as v inner join tb_clientes as c on(v.cliente_id = c.id) where v.data_venda BETWEEN ? AND ?";
+            
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, dataInicial.toString());
+            pst.setString(2, dataFinal.toString());
+            rs = pst.executeQuery();
+            
+            List <Vendas> lista = new ArrayList<>();
+            while(rs.next()){
+                Vendas obj = new Vendas();
+                
+                obj.setId(rs.getInt("v.id"));
+                obj.setData_venda(rs.getString("v.data_venda"));
+                
+                Clientes objCli = new Clientes();
+                objCli.setNome(rs.getString("c.nome"));
+                
+                obj.setCliente(objCli);
+                
+                obj.setTotal_venda(rs.getDouble("v.total_venda"));
+                obj.setObs(rs.getString("v.observacao"));
+                
+                lista.add(obj);
+            }
+            
+            return lista;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+ 
     }
 }
