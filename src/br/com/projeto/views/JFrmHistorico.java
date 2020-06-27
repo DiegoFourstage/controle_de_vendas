@@ -5,6 +5,7 @@ import br.com.projeto.model.Vendas;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -166,7 +167,8 @@ public class JFrmHistorico extends javax.swing.JFrame {
         // Consultar por período de data
         // Dica pesquisar sobre api-de-datas-no-java-8 link: https://blog.caelum.com.br/conheca-a-nova-api-de-datas-do-java-8/amp/
 
-        //Formatando as datas, convertens data Internacional para Br
+        try { // Add try catch para mencionar caso haja um erro
+            //Formatando as datas, convertens data Internacional para Br
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataInicial = LocalDate.parse(txtDataInicial.getText(),formato);
         LocalDate dataFinal = LocalDate.parse(txtDataFinal.getText(),formato);
@@ -185,6 +187,9 @@ public class JFrmHistorico extends javax.swing.JFrame {
                 v.getTotal_venda(),
                 v.getObs()
             });
+        }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Pesquise por data em período !");
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 

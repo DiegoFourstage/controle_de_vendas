@@ -157,8 +157,8 @@ public class VendasDAO {
     
     //Listar histórico de vendas por um período de data
     public List <Vendas> consultaPeridoDataVendas(LocalDate dataInicial, LocalDate dataFinal){
-        try {
-            String sql = "select v.id, v.data_venda, c.nome, v.total_venda, v.observacao from tb_vendas as v inner join tb_clientes as c on(v.cliente_id = c.id) where v.data_venda BETWEEN ? AND ?";
+        try {            
+            String sql = "select v.id, date_format(v.data_venda, '%d/%m/%Y') as data_formatada, c.nome, v.total_venda, v.observacao from tb_vendas as v inner join tb_clientes as c on(v.cliente_id = c.id) where v.data_venda BETWEEN ? AND ?";
             
             pst = conexao.prepareStatement(sql);
             pst.setString(1, dataInicial.toString());
@@ -170,7 +170,7 @@ public class VendasDAO {
                 Vendas obj = new Vendas();
                 
                 obj.setId(rs.getInt("v.id"));
-                obj.setData_venda(rs.getString("v.data_venda"));
+                obj.setData_venda(rs.getString("data_formatada"));
                 
                 Clientes objCli = new Clientes();
                 objCli.setNome(rs.getString("c.nome"));
