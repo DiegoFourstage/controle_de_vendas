@@ -1,6 +1,8 @@
 package br.com.projeto.views;
 
+import br.com.projeto.dao.ItensVendasDAO;
 import br.com.projeto.dao.VendasDAO;
+import br.com.projeto.model.ItemVendas;
 import br.com.projeto.model.Vendas;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -174,25 +176,25 @@ public class JFrmHistorico extends javax.swing.JFrame {
 
         try { // Add try catch para mencionar caso haja um erro
             //Formatando as datas, convertens data Internacional para Br
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataInicial = LocalDate.parse(txtDataInicial.getText(),formato);
-        LocalDate dataFinal = LocalDate.parse(txtDataFinal.getText(),formato);
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate dataInicial = LocalDate.parse(txtDataInicial.getText(), formato);
+            LocalDate dataFinal = LocalDate.parse(txtDataFinal.getText(), formato);
 
-        VendasDAO dao = new VendasDAO();
-        List<Vendas> lista = dao.consultaPeridoDataVendas(dataInicial, dataFinal);
+            VendasDAO dao = new VendasDAO();
+            List<Vendas> lista = dao.consultaPeridoDataVendas(dataInicial, dataFinal);
 
-        DefaultTableModel dados = (DefaultTableModel) tblHistorico.getModel();
-        dados.setNumRows(0);
+            DefaultTableModel dados = (DefaultTableModel) tblHistorico.getModel();
+            dados.setNumRows(0);
 
-        for (Vendas v : lista) {
-            dados.addRow(new Object[]{
-                v.getId(),
-                v.getData_venda(),
-                v.getCliente().getNome(),
-                v.getTotal_venda(),
-                v.getObs()
-            });
-        }
+            for (Vendas v : lista) {
+                dados.addRow(new Object[]{
+                    v.getId(),
+                    v.getData_venda(),
+                    v.getCliente().getNome(),
+                    v.getTotal_venda(),
+                    v.getObs()
+                });
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Pesquise por data em período !");
         }
@@ -201,13 +203,32 @@ public class JFrmHistorico extends javax.swing.JFrame {
     private void tblHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHistoricoMouseClicked
         // Setando dados para classe JFrameDetalheVendas
         // Dados a ser setado nos campos de textos Cliente, Data, Total do valor, e Observação
-       JFrmDetalheVendas tela = new JFrmDetalheVendas();
-       tela.txtCliente.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 2).toString());
-       tela.txtData.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 1).toString());
-       tela.txtTotalVenda.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 3).toString());
-       tela.txtObservacao.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 4).toString());
-       
-       tela.setVisible(true);       
+        JFrmDetalheVendas tela = new JFrmDetalheVendas();
+        tela.txtCliente.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 2).toString());
+        tela.txtData.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 1).toString());
+        tela.txtTotalVenda.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 3).toString());
+        tela.txtObservacao.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 4).toString());
+
+        //Agora setando dados para a tabela, antes foi dados em campos vazios, torne a tabela public para poder ter o acesso      
+        int venda_id = Integer.parseInt(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 0).toString()); 
+
+        ItemVendas itensVendas = new ItemVendas();
+        ItensVendasDAO daoItem = new ItensVendasDAO();
+        List<ItemVendas> listaItens = daoItem.listarItensVendas(venda_id);
+
+        DefaultTableModel dados = (DefaultTableModel) tela.tbDetalhada.getModel();
+        dados.setNumRows(0);
+
+        for (ItemVendas i : listaItens) {
+            dados.addRow(new Object[]{                
+                i.getProduto().getDescricao(),
+                i.getQtd(),
+                i.getProduto().getPreco(),
+                i.getSubtotal()
+            });
+        }
+
+        tela.setVisible(true);
     }//GEN-LAST:event_tblHistoricoMouseClicked
 
     /**

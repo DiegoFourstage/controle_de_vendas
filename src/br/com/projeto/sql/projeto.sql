@@ -122,14 +122,25 @@ select max(id) id from tb_vendas;
 describe tb_vendas;
 select * from tb_vendas;
 
+-- Formatando a data pelo sql
+-- date_format(data_venda, %d/%m/%Y) as data_formatada
+-- no caso a String completa ficaria assim
+-- "select v.id, date_format(v.data_venda, '%d/%m/%Y') as data_formatada, c.nome, v.total_venda, 
+-- v.observacao from tb_vendas as v inner join tb_clientes as c on(v.cliente_id = c.id) where v.data_venda BETWEEN ? AND ?"
+
 -- -------------------------------Relacionado a Item das Vendas --------------------
-create table tb_itensvendas(
-id int primary key auto_increment,
-venda_id int,
-produto_id int,
-qtd int,
-subtotal decimal(10,2)
+CREATE TABLE tb_itensvendas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    venda_id INT,
+    produto_id INT,
+    qtd INT,
+    subtotal DECIMAL(10 , 2 )
 );
+
+-- Setando dados da tabela Itens de vendas
+-- Ao clicar dados será preenchido em outra tabela usando o inner join
+select i.id, p.descricao, i.qtd, p.preco, i.subtotal from tb_itensvendas as i inner join tb_produtos as p on(i.produto_id = p.id) where i.venda_id = 1;
+
 
 describe tb_itensvendas;
 select * from tb_itensvendas;
