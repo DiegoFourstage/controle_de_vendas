@@ -48,13 +48,14 @@ public class JFrmDetalheVendas extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Detalhe da venda");
 
         jPanel2.setBackground(new java.awt.Color(114, 177, 240));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Históricos de vendas");
+        jLabel1.setText("Detalhe da venda");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -77,6 +78,7 @@ public class JFrmDetalheVendas extends javax.swing.JFrame {
 
         jLabel9.setText("Data:");
 
+        txtData.setEditable(false);
         try {
             txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -84,6 +86,10 @@ public class JFrmDetalheVendas extends javax.swing.JFrame {
         }
 
         jLabel11.setText("Cliente:");
+
+        txtCliente.setEditable(false);
+
+        txtTotalVenda.setEditable(false);
 
         jLabel12.setText("Total da Venda:");
 
@@ -227,9 +233,9 @@ public class JFrmDetalheVendas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblHistorico;
-    private javax.swing.JTextField txtCliente;
-    private javax.swing.JFormattedTextField txtData;
-    private javax.swing.JTextArea txtObservacao;
-    private javax.swing.JTextField txtTotalVenda;
+    public javax.swing.JTextField txtCliente;
+    public javax.swing.JFormattedTextField txtData;
+    public javax.swing.JTextArea txtObservacao;
+    public javax.swing.JTextField txtTotalVenda;
     // End of variables declaration//GEN-END:variables
 }

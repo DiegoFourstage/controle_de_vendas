@@ -44,7 +44,7 @@ public class JFrmHistorico extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(114, 177, 240));
 
@@ -134,6 +134,11 @@ public class JFrmHistorico extends javax.swing.JFrame {
                 "Código:", "Data da Venda:", "Cliente:", "Total da Venda:", "Obs:"
             }
         ));
+        tblHistorico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHistoricoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblHistorico);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,6 +197,18 @@ public class JFrmHistorico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Pesquise por data em período !");
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void tblHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHistoricoMouseClicked
+        // Setando dados para classe JFrameDetalheVendas
+        // Dados a ser setado nos campos de textos Cliente, Data, Total do valor, e Observação
+       JFrmDetalheVendas tela = new JFrmDetalheVendas();
+       tela.txtCliente.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 2).toString());
+       tela.txtData.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 1).toString());
+       tela.txtTotalVenda.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 3).toString());
+       tela.txtObservacao.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 4).toString());
+       
+       tela.setVisible(true);       
+    }//GEN-LAST:event_tblHistoricoMouseClicked
 
     /**
      * @param args the command line arguments
