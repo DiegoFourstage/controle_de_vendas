@@ -193,9 +193,11 @@ public class VendasDAO {
     
     // Método que calcula total da venda por data
     public double rotornaTotalVendaPorData(LocalDate data_venda){
-        double totalVenda = 0;
+        
         try {
-            String sql = "select sum (total_vendas) as total from tb_vendas where data_venda = ?";
+            double totalVenda = 0;
+            // Titando o espaço de sum, com espaço ele da error
+            String sql = "select sum(total_venda) as total from tb_vendas where data_venda = ?";
             pst = conexao.prepareStatement(sql);
             pst.setString(1, data_venda.toString());
             rs = pst.executeQuery();

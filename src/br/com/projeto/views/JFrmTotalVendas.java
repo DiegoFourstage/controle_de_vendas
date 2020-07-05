@@ -1,25 +1,20 @@
 package br.com.projeto.views;
 
-import br.com.projeto.dao.ItensVendasDAO;
 import br.com.projeto.dao.VendasDAO;
-import br.com.projeto.model.ItemVendas;
-import br.com.projeto.model.Vendas;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author D1350
  */
-public class JFrmHistorico extends javax.swing.JFrame {
+public class JFrmTotalVendas extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrmHistorico
      */
-    public JFrmHistorico() {
+    public JFrmTotalVendas() {
         initComponents();
     }
 
@@ -37,12 +32,10 @@ public class JFrmHistorico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        txtDataInicial = new javax.swing.JFormattedTextField();
-        txtDataFinal = new javax.swing.JFormattedTextField();
-        jLabel10 = new javax.swing.JLabel();
+        txtData = new javax.swing.JFormattedTextField();
         btnConsultar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblHistorico = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        txtTotalVendas = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
@@ -52,42 +45,34 @@ public class JFrmHistorico extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Históricos de vendas");
+        jLabel1.setText("Total das vendas por data");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(263, 263, 263)
+                .addGap(230, 230, 230)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(40, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31))
+                .addGap(32, 32, 32))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta por Data:"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Total"));
 
-        jLabel9.setText("Data Inicial:");
+        jLabel9.setText("Data da Vendas");
 
         try {
-            txtDataInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        try {
-            txtDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        jLabel10.setText("Data Final:");
 
         btnConsultar.setText("Pesquisar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,52 +81,43 @@ public class JFrmHistorico extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Total:");
+
+        txtTotalVendas.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(278, 278, 278)
-                .addComponent(btnConsultar)
+                .addGap(203, 203, 203)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnConsultar)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtData)
+                            .addComponent(txtTotalVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(129, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(btnConsultar))
+                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtTotalVendas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(btnConsultar)
+                .addGap(103, 103, 103))
         );
-
-        tblHistorico.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código:", "Data da Venda:", "Cliente:", "Total da Venda:", "Obs:"
-            }
-        ));
-        tblHistorico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblHistoricoMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblHistorico);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,8 +127,7 @@ public class JFrmHistorico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -161,9 +136,7 @@ public class JFrmHistorico extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,65 +144,21 @@ public class JFrmHistorico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // Consultar por período de data
-        // Dica pesquisar sobre api-de-datas-no-java-8 link: https://blog.caelum.com.br/conheca-a-nova-api-de-datas-do-java-8/amp/
-
-        try { // Add try catch para mencionar caso haja um erro
-            //Formatando as datas, convertens data Internacional para Br
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataInicial = LocalDate.parse(txtDataInicial.getText(), formato);
-            LocalDate dataFinal = LocalDate.parse(txtDataFinal.getText(), formato);
-
-            VendasDAO dao = new VendasDAO();
-            List<Vendas> lista = dao.consultaPeridoDataVendas(dataInicial, dataFinal);
-
-            DefaultTableModel dados = (DefaultTableModel) tblHistorico.getModel();
-            dados.setNumRows(0);
-
-            for (Vendas v : lista) {
-                dados.addRow(new Object[]{
-                    v.getId(),
-                    v.getData_venda(),
-                    v.getCliente().getNome(),
-                    v.getTotal_venda(),
-                    v.getObs()
-                });
-            }
+        try {
+            // Calculando a data da venda
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Formatando a data para o tipo Brasil
+        LocalDate data_venda = LocalDate.parse(txtData.getText(),formato); // Converte data_venda para o tipo Brasil
+        
+        double total_venda; // Variável do tipo numeros decimais
+        VendasDAO dao = new VendasDAO(); // Instanciando a classe
+        total_venda = dao.rotornaTotalVendaPorData(data_venda); // Total da venda passa receber método que calcular total da venda 
+        
+        txtTotalVendas.setText(String.valueOf(total_venda));
+        
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Pesquise por data em período !");
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
-
-    private void tblHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHistoricoMouseClicked
-        // Setando dados para classe JFrameDetalheVendas
-        // Dados a ser setado nos campos de textos Cliente, Data, Total do valor, e Observação
-        JFrmDetalheVendas tela = new JFrmDetalheVendas();
-        tela.txtCliente.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 2).toString());
-        tela.txtData.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 1).toString());
-        tela.txtTotalVenda.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 3).toString());
-        tela.txtObservacao.setText(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 4).toString());
-
-        //Agora setando dados para a tabela, antes foi dados em campos vazios, torne a tabela public para poder ter o acesso      
-        int venda_id = Integer.parseInt(tblHistorico.getValueAt(tblHistorico.getSelectedRow(), 0).toString()); 
-
-        ItemVendas itensVendas = new ItemVendas();
-        ItensVendasDAO daoItem = new ItensVendasDAO();
-        List<ItemVendas> listaItens = daoItem.listarItensVendas(venda_id);
-
-        DefaultTableModel dados = (DefaultTableModel) tela.tbDetalhada.getModel();
-        dados.setNumRows(0);
-
-        for (ItemVendas i : listaItens) {
-            dados.addRow(new Object[]{                
-                i.getProduto().getDescricao(),
-                i.getQtd(),
-                i.getProduto().getPreco(),
-                i.getSubtotal()
-            });
-        }
-
-        tela.setVisible(true);
-    }//GEN-LAST:event_tblHistoricoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -248,20 +177,21 @@ public class JFrmHistorico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrmHistorico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrmTotalVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrmHistorico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrmTotalVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrmHistorico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrmTotalVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrmHistorico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrmTotalVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrmHistorico().setVisible(true);
+                new JFrmTotalVendas().setVisible(true);
             }
         });
     }
@@ -270,13 +200,11 @@ public class JFrmHistorico extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblHistorico;
-    private javax.swing.JFormattedTextField txtDataFinal;
-    private javax.swing.JFormattedTextField txtDataInicial;
+    private javax.swing.JFormattedTextField txtData;
+    private javax.swing.JTextField txtTotalVendas;
     // End of variables declaration//GEN-END:variables
 }

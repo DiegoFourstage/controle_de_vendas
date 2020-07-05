@@ -128,6 +128,8 @@ select * from tb_vendas;
 -- "select v.id, date_format(v.data_venda, '%d/%m/%Y') as data_formatada, c.nome, v.total_venda, 
 -- v.observacao from tb_vendas as v inner join tb_clientes as c on(v.cliente_id = c.id) where v.data_venda BETWEEN ? AND ?"
 
+-- Total da venda caminho sql, obs: sum entre parentes não pode ter espaço entre eles
+select sum(total_venda) as total from tb_vendas where data_venda = '2020-06-26';
 -- -------------------------------Relacionado a Item das Vendas --------------------
 CREATE TABLE tb_itensvendas (
     id INT PRIMARY KEY AUTO_INCREMENT,
