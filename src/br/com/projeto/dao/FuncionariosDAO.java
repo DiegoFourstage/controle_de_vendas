@@ -178,20 +178,27 @@ public class FuncionariosDAO {
         try {
             String sql = "select * from tb_funcionarios where email=? and senha=?";
             PreparedStatement pst = conexao.prepareStatement(sql);
+
             pst.setString(1, email);
             pst.setString(2, senha);
+
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Login efetuado com sucesso !");
-                //Iremos criar a tela de Menu após esse método e implementação
-                FrmMenu tela = new FrmMenu();
-                tela.usuario = rs.getString("nome");
-                tela.setVisible(true);
+                if (rs.getString("nivel_acesso").equals("Admin")) {
+                    FrmMenu telaAdmin = new FrmMenu();
+                    telaAdmin.setVisible(true);
+
+                } else if (rs.getString("nivel_acesso").equals("User")) {
+                    FrmMenu telaUsuario = new FrmMenu();
+                    telaUsuario.setVisible(true);
+                    telaUsuario.menuHistoricos.setEnabled(false);
+                    telaUsuario.menuPosicao.setVisible(false);
+                }
 
             } else {
                 JOptionPane.showMessageDialog(null, "Email ou senha incorretos !");
-                FrmLogin login = new FrmLogin();                
+                FrmLogin login = new FrmLogin();
                 login.setVisible(true);
             }
 
