@@ -8,6 +8,7 @@ package br.com.projeto.views;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -149,12 +150,22 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu5.setText("Configurações");
 
         jMenuItem6.setText("Troca de Usuários");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem6);
 
         jMenuBar1.add(jMenu5);
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/imagens/exit.png"))); // NOI18N
         jMenu6.setText("Sair");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -183,7 +194,7 @@ public class FrmMenu extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1296, 759));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     // Variável que receberar os dados do nome no método efetuar login
     public String usuario;
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -192,6 +203,25 @@ public class FrmMenu extends javax.swing.JFrame {
         //Usuário logado, lblLogado exibirar à variável String 
         lbLogado.setText(usuario);
     }//GEN-LAST:event_formWindowActivated
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // Efeturar logout
+        FrmLogin login = new FrmLogin(); // Instanciando a JFrame Login
+        this.dispose(); // Limpar e fechar a tela
+
+        login.setVisible(true); // Abrir a tela para outro funcionário logar
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        // Sair do programa
+        int op;
+        op = JOptionPane.showConfirmDialog(null, "Deseja mesmo sair");
+        
+        if(op == 0){
+            System.exit(0);
+        }
+        
+    }//GEN-LAST:event_jMenu6MouseClicked
 
     /**
      * @param args the command line arguments
