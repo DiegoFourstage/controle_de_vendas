@@ -72,7 +72,7 @@ public class FrmProduto extends javax.swing.JFrame {
         txtPesquisar = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -534,7 +534,7 @@ public class FrmProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelCadastro;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane painelProduto;
+    public javax.swing.JTabbedPane painelProduto;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescricao;
