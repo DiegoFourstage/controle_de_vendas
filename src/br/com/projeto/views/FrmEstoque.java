@@ -8,6 +8,7 @@ package br.com.projeto.views;
 import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.model.Produtos;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -110,6 +111,11 @@ public class FrmEstoque extends javax.swing.JFrame {
                 tblControEstoProAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        tblControEstoPro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblControEstoProMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblControEstoPro);
@@ -270,6 +276,11 @@ public class FrmEstoque extends javax.swing.JFrame {
             listar();
         }
     }//GEN-LAST:event_txtDescriKeyReleased
+
+    private void tblControEstoProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblControEstoProMouseClicked
+        // Preencher o campo de texto ao clicar no item selecionado
+        txtEstAtual.setText(tblControEstoPro.getValueAt(tblControEstoPro.getSelectedRow(), 3).toString());
+    }//GEN-LAST:event_tblControEstoProMouseClicked
 
     /**
      * @param args the command line arguments
