@@ -19,7 +19,6 @@ public class FrmEstoque extends javax.swing.JFrame {
     /**
      * Creates new form FrmEstoque
      */
-    
     // Método para listar produtos, usando modelo produtos e método listar de Produtos DAO
     public void listar() {
         DefaultTableModel dados = (DefaultTableModel) tblControEstoPro.getModel(); // Passando para uma tabela Default
@@ -134,6 +133,12 @@ public class FrmEstoque extends javax.swing.JFrame {
 
         jLabel2.setText("Descrição:");
 
+        txtDescri.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDescriKeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("Qtd:");
 
         jLabel4.setText("Estoque Atual:");
@@ -141,6 +146,11 @@ public class FrmEstoque extends javax.swing.JFrame {
         txtEstAtual.setEditable(false);
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Adicionar");
 
@@ -228,9 +238,38 @@ public class FrmEstoque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblControEstoProAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblControEstoProAncestorAdded
-        // Executar ao iniciar programa
-        listar();
+        // Executar ao iniciar programa        
+            listar();        
     }//GEN-LAST:event_tblControEstoProAncestorAdded
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // Pesquisar produto e exibir na tabela
+        String produto = "%" + txtDescri.getText() + "%";
+
+        ProdutoDAO dao = new ProdutoDAO();
+        List<Produtos> lista = dao.pesquisaNome(produto);
+
+        DefaultTableModel dados = (DefaultTableModel) tblControEstoPro.getModel();
+        dados.setNumRows(0);
+
+        for (Produtos p : lista) {
+            dados.addRow(new Object[]{
+                p.getId(),
+                p.getDescricao(),
+                p.getPreco(),
+                p.getQtdEstoque(),
+                p.getFornecedor().getNome()
+            });
+        }
+        
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void txtDescriKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescriKeyReleased
+        // Caso campo de texto descrição esteja vazio, exibir toda a lista
+        if(txtDescri.getText().isEmpty()){
+            listar();
+        }
+    }//GEN-LAST:event_txtDescriKeyReleased
 
     /**
      * @param args the command line arguments
