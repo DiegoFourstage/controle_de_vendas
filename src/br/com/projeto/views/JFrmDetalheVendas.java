@@ -1,13 +1,4 @@
 package br.com.projeto.views;
-
-import br.com.projeto.dao.VendasDAO;
-import br.com.projeto.model.Vendas;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author D1350
@@ -44,7 +35,7 @@ public class JFrmDetalheVendas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtObservacao = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblHistorico = new javax.swing.JTable();
+        tbDetalhada = new javax.swing.JTable();
 
         jButton1.setText("jButton1");
 
@@ -148,15 +139,15 @@ public class JFrmDetalheVendas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tblHistorico.setModel(new javax.swing.table.DefaultTableModel(
+        tbDetalhada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código:", "Produto:", "Cliente:", "Qtd comprada:", "Valor:", "Subtotal:"
+                "Produto:", "Qtd comprada:", "Valor:", "Subtotal:"
             }
         ));
-        jScrollPane1.setViewportView(tblHistorico);
+        jScrollPane1.setViewportView(tbDetalhada);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,7 +223,7 @@ public class JFrmDetalheVendas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblHistorico;
+    public javax.swing.JTable tbDetalhada;
     public javax.swing.JTextField txtCliente;
     public javax.swing.JFormattedTextField txtData;
     public javax.swing.JTextArea txtObservacao;
