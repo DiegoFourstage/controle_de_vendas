@@ -223,5 +223,20 @@ public class ProdutoDAO {
         }
     }
     
+    // Adicionar ao Estoque
+    public void adicionarEstoque(int id, int qtd_nova){
+        try {
+            String sql = "update tb_produtos set qtd_estoque = ? where id=?"; // Caminho sql para atualizar quantidade
+            pst = conexao.prepareStatement(sql); // Preparando a conexao como o banco de dados
+            pst.setInt(1, qtd_nova);
+            pst.setInt(2, id);
+            
+            pst.executeUpdate();
+            pst.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
 
 }

@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmEstoque extends javax.swing.JFrame {
 
+    // Variáveis publicas para adicionar qtd dos produtos
+    int idProduto, qtd_nova;
+
     /**
      * Creates new form FrmEstoque
      */
@@ -70,6 +73,11 @@ public class FrmEstoque extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -159,6 +167,11 @@ public class FrmEstoque extends javax.swing.JFrame {
         });
 
         btnAdd.setText("Adicionar");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -236,7 +249,7 @@ public class FrmEstoque extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -245,7 +258,7 @@ public class FrmEstoque extends javax.swing.JFrame {
 
     private void tblControEstoProAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblControEstoProAncestorAdded
         // Executar ao iniciar programa        
-            listar();        
+        listar();
     }//GEN-LAST:event_tblControEstoProAncestorAdded
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -267,12 +280,12 @@ public class FrmEstoque extends javax.swing.JFrame {
                 p.getFornecedor().getNome()
             });
         }
-        
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtDescriKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescriKeyReleased
         // Caso campo de texto descrição esteja vazio, exibir toda a lista
-        if(txtDescri.getText().isEmpty()){
+        if (txtDescri.getText().isEmpty()) {
             listar();
         }
     }//GEN-LAST:event_txtDescriKeyReleased
@@ -280,7 +293,43 @@ public class FrmEstoque extends javax.swing.JFrame {
     private void tblControEstoProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblControEstoProMouseClicked
         // Preencher o campo de texto ao clicar no item selecionado
         txtEstAtual.setText(tblControEstoPro.getValueAt(tblControEstoPro.getSelectedRow(), 3).toString());
+
+        //Preencher o campo descrição do produto
+        txtDescri.setText(tblControEstoPro.getValueAt(tblControEstoPro.getSelectedRow(), 1).toString());
+
+        // Ao clicar no item da tabela, id será selecionado invisivelmente
+        idProduto = Integer.parseInt(tblControEstoPro.getValueAt(tblControEstoPro.getSelectedRow(), 0).toString());
+
     }//GEN-LAST:event_tblControEstoProMouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // Implementando o método adicionar ao estoque
+        try {
+            int qtdAdicionada, qtd_Estoque;
+
+            qtd_Estoque = Integer.parseInt(txtEstAtual.getText()); // Quantidade atual em estoque
+            qtdAdicionada = Integer.parseInt(txtQtd.getText()); // Adicionando a quantidade a mais
+
+            qtd_nova = qtd_Estoque + qtdAdicionada; // Somando o que foi adicionado mais o tinha da qtd estoque atual
+
+            ProdutoDAO dao = new ProdutoDAO(); // Instanciando para usar o méotodo
+
+            dao.adicionarEstoque(idProduto, qtd_nova);  // Passando novos dados para os parametros aonde método vai recebe-los
+
+            txtQtd.setText(null);
+
+            JOptionPane.showMessageDialog(null, "Estoque do produto atualizado !");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Informe os dados de quantidade nova !" + "Error " + e);
+        }
+
+
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // Atualizando a lista quando produto for adicionado ao estoque
+        listar();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
